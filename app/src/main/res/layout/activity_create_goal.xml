@@ -97,7 +97,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextItemCost" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/editTextItemMonthly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -111,7 +111,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewItemMonthly" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/nextGoalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="84dp"
@@ -121,12 +121,12 @@
         android:text="Next"
         android:textColor="@color/whiteText"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toRightOf="@+id/button2"
+        app:layout_constraintLeft_toRightOf="@+id/cancelGoalButton"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText4" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/cancelGoalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="85dp"
