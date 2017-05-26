@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Quibit</string>
+    <string name="title_activity_create_goal">CreateGoalActivity</string>
 </resources>
