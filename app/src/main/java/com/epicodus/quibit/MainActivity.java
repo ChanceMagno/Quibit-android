@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             toast.setGravity(Gravity.CENTER, 0, 100);
             toast.show();
         } else {
-//            mGoalSearch.setText("");
+            mGoalSearch.setText("");
             Intent intent = new Intent(MainActivity.this, SearchRewards.class);
             intent.putExtra("goalSearch", goalSearch);
             startActivity(intent);

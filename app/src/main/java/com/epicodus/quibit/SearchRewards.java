@@ -3,6 +3,7 @@ package com.epicodus.quibit;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -13,9 +14,9 @@ import butterknife.ButterKnife;
 
 public class SearchRewards extends AppCompatActivity {
     @Bind(R.id.searchGoalHeader) TextView mSearchGoalHeader;
-    @Bind(R.id.goalSearchResults) ListView mgoalSearchResults;
+    @Bind(R.id.listView) ListView mListView;
 
-    private String[] SearchResults = new String[] {"item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8"};
+    private String[] searchResults = new String[] {"ipod", "canoe", "ps4", "awesome car part", "test item", " test item6", " test item7", " test item8"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,5 +27,8 @@ public class SearchRewards extends AppCompatActivity {
         Intent intent = getIntent();
         String goalSearch = intent.getStringExtra("goalSearch");
         mSearchGoalHeader.setText(String.format("Searching by: %s", goalSearch));
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, searchResults);
+        mListView.setAdapter(adapter);
     }
 }
