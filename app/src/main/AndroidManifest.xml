@@ -16,8 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateGoal" />
-        <activity android:name=".SearchRewards"></activity>
+        <activity android:name=".SearchRewards">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.epicodus.quibit.MainActivity">
+            </meta-data>
+        </activity>
+        <activity android:name=".CreateGoal">
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value="com.epicodus.quibit.ADD PARENT HERE">-->
+            <!--</meta-data>-->
+        </activity>
     </application>
 
 </manifest>
