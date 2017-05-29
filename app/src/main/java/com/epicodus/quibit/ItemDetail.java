@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 public class ItemDetail extends AppCompatActivity implements View.OnClickListener{
     @Bind(R.id.itemTextView) TextView mItemTextView;
     @Bind(R.id.setItemAsGoalButton) Button mSetItemAsGoalButton;
+    String selectedItem = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +21,7 @@ public class ItemDetail extends AppCompatActivity implements View.OnClickListene
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        String selectedItem = intent.getStringExtra("selectedItem");
+        selectedItem = intent.getStringExtra("selectedItem");
         mItemTextView.setText(String.format("item detail here %s", selectedItem));
 
         mSetItemAsGoalButton.setOnClickListener(this);
@@ -30,6 +31,8 @@ public class ItemDetail extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-
+        Intent intent = new Intent(ItemDetail.this, CreateGoal.class);
+        intent.putExtra("selectedItem",selectedItem);
+        startActivity(intent);
     }
 }
