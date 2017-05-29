@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.epicodus.quibit.MainActivity">
 
+
     <Button
         android:id="@+id/getStartedButton"
         android:layout_width="0dp"
@@ -52,5 +53,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="66dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_dialog_info"
+        android:layout_marginRight="177dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

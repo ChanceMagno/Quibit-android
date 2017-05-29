@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -22,11 +22,10 @@
                 android:value="com.epicodus.quibit.MainActivity" />
         </activity>
         <activity android:name=".CreateGoal">
-
-            <!-- <meta-data -->
-            <!-- android:name="android.support.PARENT_ACTIVITY" -->
-            <!-- android:value="com.epicodus.quibit.ADD PARENT HERE"> -->
-            <!-- </meta-data> -->
+             <meta-data
+             android:name="android.support.PARENT_ACTIVITY"
+             android:value="com.epicodus.quibit.ItemDetail">
+             </meta-data>
         </activity>
         <activity android:name=".ItemDetail">
             <meta-data
