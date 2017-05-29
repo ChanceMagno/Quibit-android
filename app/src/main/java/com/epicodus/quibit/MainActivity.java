@@ -36,16 +36,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          boolean goalstatus = Boolean.parseBoolean(intent.getStringExtra("goalSet"));
             if(goalstatus){
                 goalSet = goalstatus;
+                mGetStartedButton.setVisibility(View.GONE);
+                mGetStartedButton.setVisibility(View.GONE);
+                mGoalSearch.setVisibility(View.GONE);
+            } else {
+                mGetStartedButton.setOnClickListener(this);
             }
-
-        //for displaying getStarted button if no goal set
-        if (goalSet) {
-            mGetStartedButton.setVisibility(View.GONE);
-            mGetStartedButton.setVisibility(View.GONE);
-            mGoalSearch.setVisibility(View.GONE);
-        } else {
-            mGetStartedButton.setOnClickListener(this);
-        }
     }
 
 

@@ -53,6 +53,11 @@ public class CreateGoal extends AppCompatActivity implements View.OnClickListene
         String itemCost = mEditTextItemCost.getText().toString();
         String itemMonthly = mEditTextItemMonthly.getText().toString();
 
+        mEditTextName.setText("");
+        mEditTextItem.setText("");
+        mEditTextItemCost.setText("");
+        mEditTextItemMonthly.setText("");
+
         if (name.equals("") || item.equals("") || itemCost.equals("") || itemMonthly.equals("")) {
             Toast toast = Toast.makeText(CreateGoal.this, "Please answer all Questions.", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 100);
