@@ -3,6 +3,8 @@ package com.epicodus.quibit;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,5 +32,15 @@ public class SearchRewards extends AppCompatActivity {
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, searchResults);
         mListView.setAdapter(adapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedItem = ((TextView)view).getText().toString();
+                Intent intent = new Intent(SearchRewards.this, ItemDetail.class);
+                intent.putExtra("selectedItem",selectedItem);
+                startActivity(intent);
+            }
+        });
     }
 }
