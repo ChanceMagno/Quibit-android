@@ -1,6 +1,7 @@
 package com.epicodus.quibit;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +19,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.getStartedButton) Button mGetStartedButton;
 
-//    @Bind(R.id.getStartedText) TextView mGetStartedText;
+    @Bind(R.id.getStartedText) TextView mGetStartedText;
     @Bind(R.id.goalSearch) EditText mGoalSearch;
 
     boolean goalSet = false;
@@ -28,6 +29,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        Typeface modak = Typeface.createFromAsset(getAssets(), "fonts/Modak.ttf");
+        mGetStartedText.setTypeface(modak);
+        mGetStartedButton.setTypeface(modak);
 
         //for displaying getStarted button if no goal set
         if (goalSet) {

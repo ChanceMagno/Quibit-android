@@ -36,12 +36,16 @@ public class CreateGoal extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_create_goal);
         ButterKnife.bind(this);
 
-//        setting textView font
-        Typeface formTitle = (Typeface.createFromAsset(getAssets(), "Pacifico.ttf"));
-        mTextViewName.setTypeface(formTitle);
-        mTextViewItem.setTypeface(formTitle);
-        mTextViewItemCost.setTypeface(formTitle);
-        mTextViewItemMonthly.setTypeface(formTitle);
+
+//        setting textView fonts
+        Typeface modakFont = Typeface.createFromAsset(getAssets(), "fonts/Modak.ttf");
+        mNextGoalButton.setTypeface(modakFont);
+
+        Typeface pacificoFont = (Typeface.createFromAsset(getAssets(), "Pacifico.ttf"));
+        mTextViewName.setTypeface(pacificoFont);
+        mTextViewItem.setTypeface(pacificoFont);
+        mTextViewItemCost.setTypeface(pacificoFont);
+        mTextViewItemMonthly.setTypeface(pacificoFont);
 
         mNextGoalButton.setOnClickListener(this);
 
