@@ -19,19 +19,21 @@
         <activity android:name=".SearchRewards">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.epicodus.quibit.MainActivity"></meta-data>
+                android:value="com.epicodus.quibit.MainActivity" />
         </activity>
         <activity android:name=".CreateGoal">
+
             <!-- <meta-data -->
             <!-- android:name="android.support.PARENT_ACTIVITY" -->
             <!-- android:value="com.epicodus.quibit.ADD PARENT HERE"> -->
             <!-- </meta-data> -->
         </activity>
         <activity android:name=".ItemDetail">
-             <meta-data
-             android:name="android.support.PARENT_ACTIVITY"
-             android:value="com.epicodus.quibit.SearchRewards">
-             </meta-data>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.epicodus.quibit.SearchRewards"></meta-data>
         </activity>
+        <activity android:name=".About"></activity>
     </application>
+
 </manifest>
