@@ -65,6 +65,7 @@ public class CreateGoal extends AppCompatActivity implements View.OnClickListene
             intent.putExtra("itemCost", itemCost);
             intent.putExtra("itemMonthly", itemMonthly);
             intent.putExtra("selectedItem", selectedItem);
+            intent.putExtra("goalSet", "true");
             startActivity(intent);
         }
     }

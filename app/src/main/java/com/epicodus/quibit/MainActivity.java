@@ -18,10 +18,8 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.getStartedButton) Button mGetStartedButton;
-
     @Bind(R.id.getStartedText) TextView mGetStartedText;
     @Bind(R.id.goalSearch) EditText mGoalSearch;
-
     boolean goalSet = false;
 
     @Override
@@ -33,6 +31,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Typeface modak = Typeface.createFromAsset(getAssets(), "fonts/Modak.ttf");
         mGetStartedText.setTypeface(modak);
         mGetStartedButton.setTypeface(modak);
+
+        Intent intent = getIntent();
+         boolean goalstatus = Boolean.parseBoolean(intent.getStringExtra("goalSet"));
+            if(goalstatus){
+                goalSet = goalstatus;
+            }
 
         //for displaying getStarted button if no goal set
         if (goalSet) {
