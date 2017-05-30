@@ -10,7 +10,6 @@ A project to track progress saving up to purchase a user selected item.
 ### Prerequisites
 
 * Android Studio
- * Download here: "https://developer.android.com/studio/index.html?gclid=Cj0KCQjwja_JBRD8ARIsAHitdbkoCPLgHA81iZRvZjBESFzO7dAxUiMht7PnrSr16MZMeSn6j1_nNXIaAnkFEALw_wcB"
 
 ### Installing
 
@@ -21,13 +20,8 @@ A project to track progress saving up to purchase a user selected item.
 
 ## Built With
 
-* Android Studio](https://developer.android.com/studio/index.html?gclid=Cj0KCQjwja_JBRD8ARIsAHitdbkoCPLgHA81iZRvZjBESFzO7dAxUiMht7PnrSr16MZMeSn6j1_nNXIaAnkFEALw_wcB) - The framework used
+* Android Studio(https://developer.android.com/studio/index.html?gclid=Cj0KCQjwja_JBRD8ARIsAHitdbkoCPLgHA81iZRvZjBESFzO7dAxUiMht7PnrSr16MZMeSn6j1_nNXIaAnkFEALw_wcB) - The framework used
 * [Java](https://www.java.com/en/) - Dependency Management
-
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://github.com/ChanceMagno/Quibit-android) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Version
 
@@ -35,7 +29,7 @@ Please read [CONTRIBUTING.md](https://github.com/ChanceMagno/Quibit-android) for
 
 ## Authors
 
-* **Chance Magno** - *Initial work* - [PurpleBooth](https://github.com/ChanceMagno)
+* **Chance Magno** - *Initial work* - (https://github.com/ChanceMagno)
 
 ## License
 
