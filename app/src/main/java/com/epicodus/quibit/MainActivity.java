@@ -28,9 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        Typeface modak = Typeface.createFromAsset(getAssets(), "fonts/Modak.ttf");
-        mGetStartedText.setTypeface(modak);
-        mGetStartedButton.setTypeface(modak);
+        Typeface pacifico = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
+        Typeface salsa = Typeface.createFromAsset(getAssets(), "fonts/Salsa.ttf");
+        mGetStartedText.setTypeface(pacifico);
+        mGetStartedButton.setTypeface(salsa);
 
         Intent intent = getIntent();
          boolean goalstatus = Boolean.parseBoolean(intent.getStringExtra("goalSet"));

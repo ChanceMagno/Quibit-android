@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:text="Lets Search for a Goal!"
-        android:textSize="24sp"
+        android:textSize="30sp"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -58,12 +58,12 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="66dp"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="4dp"
         android:clickable="true"
         app:fabSize="mini"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_dialog_info"
-        android:layout_marginRight="177dp"
+        android:layout_marginRight="328dp"
         app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
