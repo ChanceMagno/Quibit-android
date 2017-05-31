@@ -13,10 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.epicodus.quibit.models.walmartService;
 import com.epicodus.quibit.ui.About;
+
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.getStartedButton) Button mGetStartedButton;
@@ -65,6 +71,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     toast.setGravity(Gravity.CENTER, 0, 100);
                     toast.show();
                 } else {
+                    walmartService.searchItems(goalSearch, new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+
+                        }
+                    });
                     mGoalSearch.setText("");
                     Intent intent = new Intent(MainActivity.this, SearchRewards.class);
                     intent.putExtra("goalSearch", goalSearch);
