@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+    buildTypes.each{
+        it.buildConfigField 'String', 'WALMART_API_KEY', WalmartApiKey
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
