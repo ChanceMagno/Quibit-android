@@ -28,4 +28,44 @@ public class Item {
         this.mRating = mRating;
         this.mPurchaseLink = mPurchaseLink;
     }
+
+    public String getItemId() {
+        return mItemId;
+    }
+
+    public String getName() {
+        return mName;
+    }
+
+    public String getMsrp() {
+        return mMsrp;
+    }
+
+    public String getSalePrice() {
+        return mSalePrice;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public String getThumbnailImage() {
+        return mThumbnailImage;
+    }
+
+    public String getMediumImage() {
+        return mMediumImage;
+    }
+
+    public String getLargeImage() {
+        return mLargeImage;
+    }
+
+    public String getRating() {
+        return mRating;
+    }
+
+    public String getPurchaseLink() {
+        return mPurchaseLink;
+    }
 }
