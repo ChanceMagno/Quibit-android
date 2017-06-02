@@ -1,4 +1,4 @@
-package com.epicodus.quibit.ui;
+package com.epicodus.quibit;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

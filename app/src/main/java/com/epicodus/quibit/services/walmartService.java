@@ -1,5 +1,4 @@
-package com.epicodus.quibit.models;
-import android.app.DownloadManager;
+package com.epicodus.quibit.services;
 import android.util.Log;
 
 import com.epicodus.quibit.Constants;

@@ -13,8 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.epicodus.quibit.models.walmartService;
-import com.epicodus.quibit.ui.About;
+import com.epicodus.quibit.services.walmartService;
 
 import java.io.IOException;
 
