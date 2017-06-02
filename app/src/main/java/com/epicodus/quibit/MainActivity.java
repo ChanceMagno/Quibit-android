@@ -5,7 +5,7 @@ import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -13,18 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.epicodus.quibit.models.Item;
-import com.epicodus.quibit.services.walmartService;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.getStartedButton) Button mGetStartedButton;

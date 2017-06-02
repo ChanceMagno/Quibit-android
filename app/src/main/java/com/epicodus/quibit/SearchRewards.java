@@ -3,13 +3,13 @@ package com.epicodus.quibit;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.epicodus.quibit.adapters.ItemListAdapter;
 import com.epicodus.quibit.models.Item;
 import com.epicodus.quibit.services.walmartService;
 
@@ -23,9 +23,9 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class SearchRewards extends AppCompatActivity {
-    @Bind(R.id.searchGoalHeader) TextView mSearchGoalHeader;
-    @Bind(R.id.listView) ListView mListView;
     public ArrayList<Item> mItemList = new ArrayList<>();
+    private ItemListAdapter mAdapter;
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,6 @@ public class SearchRewards extends AppCompatActivity {
 
         Intent intent = getIntent();
         String goalSearch = intent.getStringExtra("goalSearch");
-        mSearchGoalHeader.setText(String.format("Searching by: %s", goalSearch));
 
         getItemList(goalSearch);
     }
@@ -56,7 +55,13 @@ public class SearchRewards extends AppCompatActivity {
                 SearchRewards.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.i("item", mItemList.get(0).getName());
+
+                        mAdapter = new ItemListAdapter(getApplicationContext(), mItemList);
+                        mRecyclerView.setAdapter(mAdapter);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(SearchRewards.this);
+                        mRecyclerView.setLayoutManager(layoutManager);
+                        mRecyclerView.setHasFixedSize(true);
+
                     }
                 });
 
