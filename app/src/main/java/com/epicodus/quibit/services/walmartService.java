@@ -27,7 +27,9 @@ public class walmartService {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.WALMART_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter(Constants.WALMART_QUERY_PARAMETER, item);
         urlBuilder.addQueryParameter(Constants.WALMART_FORMAT_PARAMETER, "json");
+        urlBuilder.addQueryParameter(Constants.WALMART_NUMBER_PARAMETER, "25");
         urlBuilder.addQueryParameter("apiKey", Constants.WALMART_API_KEY);
+
         String url = urlBuilder.build().toString();
 
         Log.d("url", url);
@@ -52,15 +54,15 @@ public class walmartService {
 
                     String id = itemJSON.getString("itemId");
                     Log.i("test", id);
-                    String name = itemJSON.getString("name");
+                    String name = itemJSON.optString("name");
                     String msrp = itemJSON.optString("msrp");
                     String salePrice = itemJSON.optString("salePrice");
                     String description = itemJSON.optString("shortDescription");
                     String thumbnailImage = itemJSON.optString("thumbnailImage");
                     String mediumImage = itemJSON.optString("mediumImage");
                     String largeImage = itemJSON.optString("largeImage");
-                    String rating = itemJSON.optString("customerRating");
-                    String purchaseLink = itemJSON.getString("addToCartUrl");
+                    String rating = itemJSON.optString("customerRating") + "000";
+                    String purchaseLink = itemJSON.optString("addToCartUrl");
 
                     Item itemInstance = new Item(id, name, msrp, salePrice, description, thumbnailImage, mediumImage, largeImage, rating, purchaseLink);
                     items.add(itemInstance);

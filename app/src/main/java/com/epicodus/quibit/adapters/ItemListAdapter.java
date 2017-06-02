@@ -8,6 +8,7 @@ package com.epicodus.quibit.adapters;
 import android.content.Context;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +76,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             mDescriptionTextView.setText(item.getDescription());
             mMSRP.setText(item.getMsrp());
             mPrice.setText(item.getSalePrice());
+            Log.d("rating", item.getRating());
             mRatingBar.setRating(parseFloat(item.getRating()) / 2);
             Picasso.with(itemView.getContext()).load(item.getLargeImage()).resize(MAX_WIDTH, MAX_HEIGHT).centerCrop().into(mImageView);
         }
