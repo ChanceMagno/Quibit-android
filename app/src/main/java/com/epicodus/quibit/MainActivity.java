@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -13,9 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.epicodus.quibit.models.Item;
 import com.epicodus.quibit.services.walmartService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.goalSearch) EditText mGoalSearch;
     @Bind(R.id.about) FloatingActionButton mAbout;
     boolean goalSet = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,29 +67,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.getStartedButton:
-
                 String goalSearch = mGoalSearch.getText().toString();
                 if (goalSearch.equals("")) {
                     Toast toast = Toast.makeText(MainActivity.this, "Please input an item to search for.", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 100);
                     toast.show();
                 } else {
-                    walmartService.searchItems(goalSearch, new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-
-                        }
-
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-
-                        }
-                    });
                     mGoalSearch.setText("");
                     Intent intent = new Intent(MainActivity.this, SearchRewards.class);
                     intent.putExtra("goalSearch", goalSearch);
                     startActivity(intent);
-
                 }
                 break;
 
