@@ -3,6 +3,8 @@ package com.epicodus.quibit;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.epicodus.quibit.R;
+
 public class About extends AppCompatActivity {
 
     @Override
