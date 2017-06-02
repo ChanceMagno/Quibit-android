@@ -76,7 +76,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             mMSRP.setText(item.getMsrp());
             mPrice.setText(item.getSalePrice());
             mRatingBar.setRating(parseFloat(item.getRating()) / 2);
-            Picasso.with(itemView.getContext()).load(item.getThumbnailImage()).resize(MAX_WIDTH, MAX_HEIGHT).centerCrop().into(mImageView);
+            Picasso.with(itemView.getContext()).load(item.getLargeImage()).resize(MAX_WIDTH, MAX_HEIGHT).centerCrop().into(mImageView);
         }
     }
 }

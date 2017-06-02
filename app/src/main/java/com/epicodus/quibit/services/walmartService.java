@@ -47,16 +47,19 @@ public class walmartService {
                 JSONObject itemAPIJSON = new JSONObject(jsonData);
                 JSONArray itemListJSON = itemAPIJSON.getJSONArray("items");
                 for (int i = 0; i < itemListJSON.length(); i++) {
+
                     JSONObject itemJSON = itemListJSON.getJSONObject(i);
+
                     String id = itemJSON.getString("itemId");
+                    Log.i("test", id);
                     String name = itemJSON.getString("name");
-                    String msrp = itemJSON.getString("msrp");
-                    String salePrice = itemJSON.getString("salePrice");
-                    String description = itemJSON.getString("shortDescription");
-                    String thumbnailImage = itemJSON.getString("thumbnailImage");
-                    String mediumImage = itemJSON.getString("mediumImage");
-                    String largeImage = itemJSON.getString("largeImage");
-                    String rating = itemJSON.getString("customerRating");
+                    String msrp = itemJSON.optString("msrp");
+                    String salePrice = itemJSON.optString("salePrice");
+                    String description = itemJSON.optString("shortDescription");
+                    String thumbnailImage = itemJSON.optString("thumbnailImage");
+                    String mediumImage = itemJSON.optString("mediumImage");
+                    String largeImage = itemJSON.optString("largeImage");
+                    String rating = itemJSON.optString("customerRating");
                     String purchaseLink = itemJSON.getString("addToCartUrl");
 
                     Item itemInstance = new Item(id, name, msrp, salePrice, description, thumbnailImage, mediumImage, largeImage, rating, purchaseLink);
