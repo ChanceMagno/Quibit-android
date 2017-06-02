@@ -2,12 +2,21 @@ package com.epicodus.quibit.services;
 import android.util.Log;
 
 import com.epicodus.quibit.Constants;
+import com.epicodus.quibit.models.Item;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 
 public class walmartService {
     public static final String TAG = walmartService.class.getSimpleName();
@@ -28,4 +37,39 @@ public class walmartService {
         Call call = client.newCall(request);
         call.enqueue(callback);
     }
+
+    public ArrayList<Item> processResults(Response response) {
+        ArrayList<Item> items = new ArrayList<>();
+
+        try {
+            String jsonData = response.body().string();
+            if (response.isSuccessful()) {
+                JSONObject itemAPIJSON = new JSONObject(jsonData);
+                JSONArray itemListJSON = itemAPIJSON.getJSONArray("items");
+                for (int i = 0; i < itemListJSON.length(); i++) {
+                    JSONObject itemJSON = itemListJSON.getJSONObject(i);
+                    String id = itemJSON.getString("itemId");
+                    String name = itemJSON.getString("name");
+                    String msrp = itemJSON.getString("msrp");
+                    String salePrice = itemJSON.getString("salePrice");
+                    String description = itemJSON.getString("shortDescription");
+                    String thumbnailImage = itemJSON.getString("thumbnailImage");
+                    String mediumImage = itemJSON.getString("mediumImage");
+                    String largeImage = itemJSON.getString("largeImage");
+                    String rating = itemJSON.getString("customerRating");
+                    String purchaseLink = itemJSON.getString("addToCartUrl");
+
+                    Item itemInstance = new Item(id, name, msrp, salePrice, description, thumbnailImage, mediumImage, largeImage, rating, purchaseLink);
+                    items.add(itemInstance);
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } return items;
+
+    }
+
 }
