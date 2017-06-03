@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.epicodus.quibit.SearchRewards"
     tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
+    tools:layout_editor_absoluteX="0dp"
+    android:background="@drawable/gradient">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
