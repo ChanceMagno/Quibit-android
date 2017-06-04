@@ -30,6 +30,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 
+import static android.media.CamcorderProfile.get;
 import static java.lang.Float.parseFloat;
 
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>{
@@ -64,7 +65,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         return mItems.size();
     }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder {
+    public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @Bind(R.id.itemNameTextView) TextView mItemNameTextView;
         @Bind(R.id.itemImageView) ImageView mImageView;
         @Bind(R.id.itemDescriptionTextView) TextView mDescriptionTextView;
@@ -78,6 +79,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            itemView.setOnClickListener(this);
         }
 
 
@@ -97,6 +99,17 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             mPrice.setText(String.format("$%s", item.getSalePrice()));
             mRatingBar.setRating(parseFloat(item.getRating()) / 2);
             Picasso.with(itemView.getContext()).load(item.getLargeImage()).resize(MAX_WIDTH, MAX_HEIGHT).centerCrop().into(mImageView);
+        }
+
+        @Override
+        public void onClick(View v){
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, ItemDetail.class);
+
+            Item item = mItems.get(itemPosition);
+            intent.putExtra("item", Parcels.wrap(item));
+            mContext.startActivity(intent);
+
         }
 
     }

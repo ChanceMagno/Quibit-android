@@ -1,6 +1,8 @@
 package com.epicodus.quibit.models;
 
+import org.parceler.Parcel;
 
+@Parcel
 public class Item {
     private String mItemId;
     private String mName;
