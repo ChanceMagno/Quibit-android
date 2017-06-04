@@ -56,7 +56,7 @@ public class SearchRewards extends AppCompatActivity {
                 SearchRewards.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        findViewById(R.id.progressBar).setVisibility(View.GONE);
                         mAdapter = new ItemListAdapter(getApplicationContext(), mItemList);
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(SearchRewards.this);

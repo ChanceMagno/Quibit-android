@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 
 import static java.lang.Float.parseFloat;
 
@@ -37,10 +38,14 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
     private static final int MAX_WIDTH = 300;
     private static final int MAX_HEIGHT = 300;
 
+
+
     public ItemListAdapter(Context context, ArrayList<Item> items) {
         mContext = context;
         mItems = items;
     }
+
+
 
     @Override
     public ItemListAdapter.ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -69,11 +74,13 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
 
 
 
-        public ItemViewHolder(View itemView){
+        public ItemViewHolder (View itemView){
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
         }
+
+
 
         public void bindItem(Item item) {
             mItemNameTextView.setText(item.getName());
