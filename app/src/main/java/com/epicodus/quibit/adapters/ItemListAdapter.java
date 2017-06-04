@@ -6,6 +6,7 @@ package com.epicodus.quibit.adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,9 +17,12 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.epicodus.quibit.ItemDetail;
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.models.Item;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -73,12 +77,20 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
 
         public void bindItem(Item item) {
             mItemNameTextView.setText(item.getName());
-            mDescriptionTextView.setText(item.getDescription());
-            mMSRP.setText(item.getMsrp());
-            mPrice.setText(item.getSalePrice());
-            Log.d("rating", item.getRating());
+            if (item.getDescription().equals("")){
+                mDescriptionTextView.setText("No Description Available");
+            } else {
+                mDescriptionTextView.setText(item.getDescription());
+            }
+            if (item.getMsrp().equals("")){
+                mMSRP.setText("not available");
+            } else {
+                mMSRP.setText(String.format("$%s", item.getMsrp()));
+            }
+            mPrice.setText(String.format("$%s", item.getSalePrice()));
             mRatingBar.setRating(parseFloat(item.getRating()) / 2);
             Picasso.with(itemView.getContext()).load(item.getLargeImage()).resize(MAX_WIDTH, MAX_HEIGHT).centerCrop().into(mImageView);
         }
+
     }
 }

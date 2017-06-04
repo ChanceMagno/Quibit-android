@@ -17,7 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    @Bind(R.id.getStartedButton) Button mGetStartedButton;
+    @Bind(R.id.getStartedFloatingActionButton) FloatingActionButton mGetStartedFloatingActionButton;
     @Bind(R.id.getStartedText) TextView mGetStartedText;
     @Bind(R.id.goalSearch) EditText mGoalSearch;
     @Bind(R.id.about) FloatingActionButton mAbout;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Typeface pacifico = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         Typeface salsa = Typeface.createFromAsset(getAssets(), "fonts/Salsa.ttf");
         mGetStartedText.setTypeface(pacifico);
-        mGetStartedButton.setTypeface(salsa);
+
 
         mAbout.setOnClickListener(this);
 
@@ -43,11 +43,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          boolean goalStatus = Boolean.parseBoolean(intent.getStringExtra("goalSet"));
             if(goalStatus){
                 goalSet = goalStatus;
-                mGetStartedButton.setVisibility(View.GONE);
-                mGetStartedButton.setVisibility(View.GONE);
+                mGetStartedFloatingActionButton.setVisibility(View.GONE);
+                mGetStartedFloatingActionButton.setVisibility(View.GONE);
                 mGoalSearch.setVisibility(View.GONE);
             } else {
-                mGetStartedButton.setOnClickListener(this);
+                mGetStartedFloatingActionButton.setOnClickListener(this);
             }
     }
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.getStartedButton:
+            case R.id.getStartedFloatingActionButton:
                 String goalSearch = mGoalSearch.getText().toString();
                 if (goalSearch.equals("")) {
                     Toast toast = Toast.makeText(MainActivity.this, "Please input an item to search for.", Toast.LENGTH_LONG);
