@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.epicodus.quibit.About">
+    tools:context="com.epicodus.quibit.About"
+    android:background="@drawable/gradient">
 
     <TextView
         android:id="@+id/textView"
@@ -22,14 +23,15 @@
         android:layout_width="0dp"
         android:layout_height="438dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:text='Quibits is a money/goal oreiented helper! This application will help you visualize what skipping that "cup of coffee" can instead be put towards. Once setting a goal, you can see a live progress bar, estimations on when you can get that brand new thing!'
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.578"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" />
+        app:layout_constraintVertical_bias="0.578" />
 </android.support.constraint.ConstraintLayout>
