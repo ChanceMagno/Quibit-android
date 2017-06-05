@@ -63,7 +63,6 @@ public class CreateGoal extends AppCompatActivity implements View.OnClickListene
             toast.setGravity(Gravity.CENTER, 0, 100);
             toast.show();
         } else {
-            //temporary path, will add fragment? to verify selections
             Intent intent = new Intent(CreateGoal.this, MainActivity.class);
             intent.putExtra("name", name);
             intent.putExtra("item", item);

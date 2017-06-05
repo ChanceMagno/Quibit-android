@@ -8,30 +8,21 @@ package com.epicodus.quibit.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
 import com.epicodus.quibit.ItemDetail;
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.models.Item;
 import com.squareup.picasso.Picasso;
-
 import org.parceler.Parcels;
-
 import java.util.ArrayList;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnItemClick;
-
-import static android.media.CamcorderProfile.get;
 import static java.lang.Float.parseFloat;
 
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>{
@@ -107,12 +98,9 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         public void onClick(View v){
             int itemPosition = getLayoutPosition();
             Intent intent = new Intent(mContext, ItemDetail.class);
-
             Item item = mItems.get(itemPosition);
             intent.putExtra("item", Parcels.wrap(item));
             mContext.startActivity(intent);
-
         }
-
     }
 }

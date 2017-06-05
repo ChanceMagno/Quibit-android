@@ -23,36 +23,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.about) FloatingActionButton mAbout;
     boolean goalSet = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-
-
         Typeface pacifico = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         Typeface salsa = Typeface.createFromAsset(getAssets(), "fonts/Salsa.ttf");
         mGetStartedText.setTypeface(pacifico);
 
-
         mAbout.setOnClickListener(this);
-
         Intent intent = getIntent();
          boolean goalStatus = Boolean.parseBoolean(intent.getStringExtra("goalSet"));
-            if(goalStatus){
-                goalSet = goalStatus;
-                mGetStartedFloatingActionButton.setVisibility(View.GONE);
-                mGetStartedFloatingActionButton.setVisibility(View.GONE);
-                mGoalSearch.setVisibility(View.GONE);
-            } else {
-                mGetStartedFloatingActionButton.setOnClickListener(this);
-            }
+
+        if(goalStatus){
+            goalSet = goalStatus;
+            mGetStartedFloatingActionButton.setVisibility(View.GONE);
+            mGetStartedFloatingActionButton.setVisibility(View.GONE);
+            mGoalSearch.setVisibility(View.GONE);
+        } else {
+            mGetStartedFloatingActionButton.setOnClickListener(this);
+        }
     }
 
-
-    //getStartedButton clicked activates search
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
