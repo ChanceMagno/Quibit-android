@@ -33,10 +33,8 @@ public class SearchRewards extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_rewards);
         ButterKnife.bind(this);
-
         Intent intent = getIntent();
         String goalSearch = intent.getStringExtra("goalSearch");
-
         getItemList(goalSearch);
     }
 
@@ -65,7 +63,6 @@ public class SearchRewards extends AppCompatActivity {
 
                     }
                 });
-
             }
         });
     }

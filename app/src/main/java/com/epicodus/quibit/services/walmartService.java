@@ -49,11 +49,8 @@ public class walmartService {
                 JSONObject itemAPIJSON = new JSONObject(jsonData);
                 JSONArray itemListJSON = itemAPIJSON.getJSONArray("items");
                 for (int i = 0; i < itemListJSON.length(); i++) {
-
                     JSONObject itemJSON = itemListJSON.getJSONObject(i);
-
                     String id = itemJSON.getString("itemId");
-                    Log.i("test", id);
                     String name = itemJSON.optString("name");
                     String msrp = itemJSON.optString("msrp");
                     String salePrice = itemJSON.optString("salePrice");

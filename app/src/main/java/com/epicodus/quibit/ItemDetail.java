@@ -30,9 +30,10 @@ public class ItemDetail extends AppCompatActivity implements View.OnClickListene
     @Bind(R.id.itemDescriptionTextView) TextView mItemDescriptionTextView;
     @Bind(R.id.itemViewOnlineActionButton) FloatingActionButton mItemViewOnlineButton;
     @Bind(R.id.itemPriceTextView) TextView mItemPriceTextView;
-    Item selectedItem;
     private static final int MAX_WIDTH = 375;
     private static final int MAX_HEIGHT = 145;
+    Item selectedItem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +43,16 @@ public class ItemDetail extends AppCompatActivity implements View.OnClickListene
 
         selectedItem = Parcels.unwrap(getIntent().getParcelableExtra("item"));
         mItemViewOnlineButton.setOnClickListener(this);
+        mSetItemAsGoalButton.setOnClickListener(this);
         setContent(selectedItem);
-
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.setGoalActionButton:
-                Toast toast = Toast.makeText(ItemDetail.this, "go to user info", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(ItemDetail.this, "Boo!", Toast.LENGTH_LONG);
+                toast.show();
                 break;
             case R.id.itemViewOnlineActionButton:
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(selectedItem.getPurchaseLink()));
