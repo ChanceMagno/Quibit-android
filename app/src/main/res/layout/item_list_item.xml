@@ -25,8 +25,8 @@
 
     <ImageView
         android:id="@+id/itemImageView"
-        android:layout_width="200dp"
-        android:layout_height="175dp"
+        android:layout_width="168dp"
+        android:layout_height="115dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -47,13 +47,12 @@
         android:text="TextView"
         android:textAlignment="gravity"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="116dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginBottom="177dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="1.0" />
 
     <RatingBar
         android:isIndicator="true"
@@ -65,15 +64,8 @@
         android:layout_marginLeft="24dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="38dp"
-        app:layout_constraintHorizontal_bias="0.505" />
-
-    <android.support.constraint.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/guideline"
-        app:layout_constraintGuide_begin="380dp"
-        android:orientation="horizontal" />
+        android:layout_marginBottom="99dp"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
@@ -126,21 +118,38 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.186" />
+        app:layout_constraintHorizontal_bias="0.071" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Item Rating"
+        android:text="Rating"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/ratingBar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.046" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/ViewItemButton"
+        android:layout_width="84dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        app:backgroundTint="@color/positiveColor"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.714"
+        app:layout_constraintLeft_toRightOf="@+id/ratingBar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemDescriptionTextView"
+        app:layout_constraintVertical_bias="0.197"
+        app:srcCompat="@drawable/quibit" />
 
 
 </android.support.constraint.ConstraintLayout>
