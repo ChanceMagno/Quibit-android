@@ -1,5 +1,8 @@
 package com.epicodus.quibit;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,14 +10,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.epicodus.quibit.models.Item;
+import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import static java.lang.System.load;
 
 public class ItemDetail extends AppCompatActivity implements View.OnClickListener{
     @Bind(R.id.itemNameTextView) TextView mItemNameTextView;
@@ -32,17 +39,30 @@ public class ItemDetail extends AppCompatActivity implements View.OnClickListene
         ButterKnife.bind(this);
 
         selectedItem = Parcels.unwrap(getIntent().getParcelableExtra("item"));
-
-        mItemNameTextView.setText(selectedItem.getName());
-        mItemDescriptionTextView.setText(selectedItem.getDescription());
-        mItemPriceTextView.setText(selectedItem.getSalePrice());
+        mItemViewOnlineButton.setOnClickListener(this);
+        setContent(selectedItem);
 
 
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.setGoalActionButton:
+                Toast toast = Toast.makeText(ItemDetail.this, "go to user info", Toast.LENGTH_LONG);
+                break;
+            case R.id.itemViewOnlineActionButton:
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(selectedItem.getPurchaseLink()));
+                startActivity(webIntent);
+                break;
+        }
+    }
 
+    public void setContent(Item selectedItem){
+        mItemNameTextView.setText(selectedItem.getName());
+        mItemDescriptionTextView.setText(selectedItem.getDescription());
+        mItemPriceTextView.setText(selectedItem.getSalePrice());
+        Picasso.with(ItemDetail.this).load(selectedItem.getLargeImage()).resize(375, 145).centerCrop().into(mItemImageView);
     }
 }
 
