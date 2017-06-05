@@ -7,6 +7,7 @@ package com.epicodus.quibit.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -72,6 +73,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         @Bind(R.id.ratingBar) RatingBar mRatingBar;
         @Bind(R.id.msrpPriceTextView) TextView mMSRP;
         @Bind(R.id.salePriceTextView) TextView mPrice;
+        @Bind(R.id.ViewItemButton) FloatingActionButton mActionButton;
 
 
 
@@ -79,7 +81,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
-            itemView.setOnClickListener(this);
+            mActionButton.setOnClickListener(this);
         }
 
 
