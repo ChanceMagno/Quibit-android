@@ -31,6 +31,8 @@ public class ItemDetail extends AppCompatActivity implements View.OnClickListene
     @Bind(R.id.itemViewOnlineActionButton) FloatingActionButton mItemViewOnlineButton;
     @Bind(R.id.itemPriceTextView) TextView mItemPriceTextView;
     Item selectedItem;
+    private static final int MAX_WIDTH = 375;
+    private static final int MAX_HEIGHT = 145;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class ItemDetail extends AppCompatActivity implements View.OnClickListene
         mItemNameTextView.setText(selectedItem.getName());
         mItemDescriptionTextView.setText(selectedItem.getDescription());
         mItemPriceTextView.setText(selectedItem.getSalePrice());
-        Picasso.with(ItemDetail.this).load(selectedItem.getLargeImage()).resize(375, 145).centerCrop().into(mItemImageView);
+        Picasso.with(ItemDetail.this).load(selectedItem.getLargeImage()).resize(MAX_WIDTH, MAX_HEIGHT).centerCrop().into(mItemImageView);
     }
 }
 
