@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +29,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Bind(R.id.passwordLoginEditText) EditText mPasswordLoginEditText;
     @Bind(R.id.loginButton) Button mLoginButton;
     @Bind(R.id.loginTitleTextView) TextView mLoginTitleTextView;
+    @Bind(R.id.registTextView) TextView mRegisterTextView;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private ProgressDialog mAuthProgressDialog;
@@ -55,14 +55,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         Typeface pacifico = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         mLoginTitleTextView.setTypeface(pacifico);
+
+        mRegisterTextView.setOnClickListener(this);
         mLoginButton.setOnClickListener(this);
+
         mAuth = FirebaseAuth.getInstance();
+
     }
 
     @Override
     public void onClick(View view){
         if(view == mLoginButton){
             logInExistingUser();
+        }
+        if(view == mRegisterTextView){
+            Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
