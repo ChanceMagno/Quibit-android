@@ -3,6 +3,7 @@ package com.epicodus.quibit.ui;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,19 +40,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        //listener checking login status of user
         mAuthListener = new FirebaseAuth.AuthStateListener() {
           @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
               FirebaseUser user = firebaseAuth.getCurrentUser();
               if(user !=null){
-                  Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                  startActivity(intent);
-                  finish();
+                  mAuthProgressDialog.dismiss();
+                  checkIfEmailVerified();
               }
           }
         };
+
+        createAuthProgressDialog();
 
         Typeface pacifico = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         mLoginTitleTextView.setTypeface(pacifico);
@@ -67,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view){
         if(view == mLoginButton){
             logInExistingUser();
+            mAuthProgressDialog.show();
         }
         if(view == mRegisterTextView){
             Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
@@ -95,6 +96,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
+    }
+
+    private void checkIfEmailVerified(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user.isEmailVerified()){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        } else {
+            mPasswordLoginEditText.setText("");
+            FirebaseAuth.getInstance().signOut();
+            Toast.makeText(LoginActivity.this, "Please verify your email to login", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void createAuthProgressDialog() {
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Loading...");
+        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
+        mAuthProgressDialog.setCancelable(false);
     }
 
     @Override
