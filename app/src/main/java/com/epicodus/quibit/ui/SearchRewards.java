@@ -1,4 +1,4 @@
-package com.epicodus.quibit;
+package com.epicodus.quibit.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,9 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import android.view.View;
-import android.widget.ListView;
-import android.widget.TextView;
 
+import com.epicodus.quibit.R;
 import com.epicodus.quibit.adapters.ItemListAdapter;
 import com.epicodus.quibit.models.Item;
 import com.epicodus.quibit.services.walmartService;

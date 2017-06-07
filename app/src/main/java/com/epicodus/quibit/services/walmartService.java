@@ -1,7 +1,7 @@
 package com.epicodus.quibit.services;
 import android.util.Log;
 
-import com.epicodus.quibit.Constants;
+import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.models.Item;
 
 import org.json.JSONArray;

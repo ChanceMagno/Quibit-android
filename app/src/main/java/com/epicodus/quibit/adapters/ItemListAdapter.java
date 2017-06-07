@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import com.epicodus.quibit.ItemDetail;
+import com.epicodus.quibit.ui.ItemDetail;
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.models.Item;
 import com.squareup.picasso.Picasso;

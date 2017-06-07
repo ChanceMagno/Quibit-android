@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1003684584058",
+    "firebase_url": "https://quibit-f874f.firebaseio.com",
+    "project_id": "quibit-f874f",
+    "storage_bucket": "quibit-f874f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003684584058:android:37c246434c87b68d",
+        "android_client_info": {
+          "package_name": "com.epicodus.quibit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003684584058-5d29ipa41ij8nrbcu4aa69gucien5tpj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.epicodus.quibit",
+            "certificate_hash": "a33622fe424595f3c84bcaa235688078115b3ad3"
+          }
+        },
+        {
+          "client_id": "1003684584058-t7pmo57pjieun558efbhrtm6gn8dreti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhDRj2QfLOyPhZv6be5D4Ly-c3pVrK4oI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003684584058-t7pmo57pjieun558efbhrtm6gn8dreti.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
