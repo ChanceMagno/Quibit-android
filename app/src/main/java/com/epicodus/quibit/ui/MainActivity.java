@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -54,20 +55,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
 
         mAuth = FirebaseAuth.getInstance();
-
         Typeface pacifico = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
-        Typeface salsa = Typeface.createFromAsset(getAssets(), "fonts/Salsa.ttf");
         mGetStartedText.setTypeface(pacifico);
 
         mAbout.setOnClickListener(this);
         Intent intent = getIntent();
          boolean goalStatus = Boolean.parseBoolean(intent.getStringExtra("goalSet"));
+        String item = intent.getStringExtra("item");
+        String itemCost = intent.getStringExtra("itemCost");
+        String itemMonthly = intent.getStringExtra("itemMonthly");
 
         if(goalStatus){
             goalSet = goalStatus;
             mGetStartedFloatingActionButton.setVisibility(View.GONE);
             mGetStartedFloatingActionButton.setVisibility(View.GONE);
             mGoalSearch.setVisibility(View.GONE);
+
         } else {
             mGetStartedFloatingActionButton.setOnClickListener(this);
         }
