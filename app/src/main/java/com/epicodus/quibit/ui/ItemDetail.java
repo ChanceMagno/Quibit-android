@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.models.Item;
+import com.epicodus.quibit.services.walmartService;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -47,8 +48,10 @@ public class ItemDetail extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.setGoalActionButton:
-                Toast toast = Toast.makeText(ItemDetail.this, "Boo!", Toast.LENGTH_LONG);
-                toast.show();
+                final walmartService newWalmartService = new walmartService();
+                newWalmartService.holdOntoGoal(selectedItem);
+                Intent intent = new Intent(ItemDetail.this, CreateGoal.class);
+                startActivity(intent);
                 break;
             case R.id.itemViewOnlineActionButton:
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(selectedItem.getPurchaseLink()));
