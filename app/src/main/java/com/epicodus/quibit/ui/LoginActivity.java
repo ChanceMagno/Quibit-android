@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view){
         if(view == mLoginButton){
             logInExistingUser();
-            mAuthProgressDialog.show();
+
         }
         if(view == mRegisterTextView){
             Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
@@ -87,11 +87,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             mPasswordLoginEditText.setError("Please enter a password");
             return;
         }
+        mAuthProgressDialog.show();
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+               mAuthProgressDialog.dismiss();
                 if(!task.isSuccessful()){
+                    mAuthProgressDialog.dismiss();
                     Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_LONG).show();
                 }
             }
@@ -106,6 +109,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(intent);
             finish();
         } else {
+            mAuthProgressDialog.dismiss();
             mPasswordLoginEditText.setText("");
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(LoginActivity.this, "Please verify your email to login", Toast.LENGTH_LONG).show();

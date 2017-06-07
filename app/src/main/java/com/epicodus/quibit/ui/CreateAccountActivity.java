@@ -101,13 +101,13 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(CreateAccountActivity.this, LoginActivity.class));
                     finish();
+
                 } else {
                     Toast.makeText(CreateAccountActivity.this, "Email failed to send", Toast.LENGTH_SHORT).show();
 
-                }
+                }    FirebaseAuth.getInstance().signOut();
             }
         });
     }
@@ -133,7 +133,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                 public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 final FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null) {
-                    Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
+                    Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
