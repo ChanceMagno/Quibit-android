@@ -1,4 +1,4 @@
-package com.epicodus.quibit;
+package com.epicodus.quibit.constants;
 
 import com.epicodus.quibit.BuildConfig;
 

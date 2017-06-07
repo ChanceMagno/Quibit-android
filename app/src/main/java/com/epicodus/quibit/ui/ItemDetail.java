@@ -1,27 +1,23 @@
-package com.epicodus.quibit;
+package com.epicodus.quibit.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.epicodus.quibit.R;
 import com.epicodus.quibit.models.Item;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
-import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
-import static java.lang.System.load;
 
 public class ItemDetail extends AppCompatActivity implements View.OnClickListener{
     @Bind(R.id.itemNameTextView) TextView mItemNameTextView;
