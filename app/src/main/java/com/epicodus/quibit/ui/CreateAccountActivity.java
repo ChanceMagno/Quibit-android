@@ -19,6 +19,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -169,6 +171,10 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         return true;
 
     }
+
+//    saveUserToFirebase(){
+//        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+//    }
 
     private void createAuthProgressDialog() {
         mAuthProgressDialog = new ProgressDialog(this);
