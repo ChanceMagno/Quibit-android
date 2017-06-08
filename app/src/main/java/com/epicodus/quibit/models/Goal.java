@@ -8,13 +8,12 @@ public class Goal {
     String exchangeCost;
     String exchangeOccurenceRate;
     String goalCreationDate;
-    String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
     public Goal(String exchangeItem, String exchangeCost, String exchangeOccurenceRate) {
         this.exchangeItem = exchangeItem;
         this.exchangeCost = exchangeCost;
         this.exchangeOccurenceRate = exchangeOccurenceRate;
-        this.goalCreationDate = currentDateTimeString;
+        this.goalCreationDate =  DateFormat.getDateTimeInstance().format(new Date());
 
     }
 
