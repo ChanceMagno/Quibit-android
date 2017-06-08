@@ -30,7 +30,7 @@ public class CreateGoal extends AppCompatActivity implements View.OnClickListene
     @Bind(R.id.setGoalActionButton) FloatingActionButton mNextGoalButton;
     @Bind(R.id.editTextItem) EditText mEditTextItem;
     @Bind(R.id.editTextItemCost) EditText mEditTextItemCost;
-    @Bind(R.id.editTextItemMonthly) EditText mEditTextItemMonthly;
+    @Bind(R.id.editTextItemRate) EditText mEditTextItemRate;
     @Bind(R.id.textViewItem) TextView mTextViewItem;
     @Bind(R.id.textViewItemCost) TextView mTextViewItemCost;
     @Bind(R.id.textViewItemMonthly) TextView mTextViewItemMonthly;
@@ -50,7 +50,7 @@ public class CreateGoal extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         String item = mEditTextItem.getText().toString();
         String itemCost = mEditTextItemCost.getText().toString();
-        String itemRate = mEditTextItemMonthly.getText().toString();
+        String itemRate = mEditTextItemRate.getText().toString();
 
         isValidItem(item);
         isValidItemCost(itemCost);
@@ -60,7 +60,6 @@ public class CreateGoal extends AppCompatActivity implements View.OnClickListene
         clearTextFields();
         Goal newGoal = new Goal(item, itemCost, itemRate);
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
-        userRef.child("info").setValue(user.getDisplayName(), user.getEmail());
         userRef.child("goal").setValue(newGoal);
         Intent intent = new Intent(CreateGoal.this, MainActivity.class);
         startActivity(intent);
@@ -96,7 +95,7 @@ public class CreateGoal extends AppCompatActivity implements View.OnClickListene
     public void clearTextFields(){
         mEditTextItem.setText("");
         mEditTextItemCost.setText("");
-        mEditTextItemMonthly.setText("");
+        mEditTextItemRate.setText("");
     }
 
 }
