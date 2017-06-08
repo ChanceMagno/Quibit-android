@@ -7,7 +7,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
 
-        mAuth = FirebaseAuth.getInstance();
+
         Typeface pacifico = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         mGetStartedText.setTypeface(pacifico);
 
@@ -91,19 +90,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     toast.show();
                 } else {
                     mGoalSearch.setText("");
-                    Intent intent = new Intent(MainActivity.this, SearchRewards.class);
+                    Intent intent = new Intent(MainActivity.this, SearchGoalsActivity.class);
                     intent.putExtra("goalSearch", goalSearch);
                     startActivity(intent);
                 }
                 break;
 
             case R.id.about:
-                Intent intentAbout = new Intent(MainActivity.this, About.class);
+                Intent intentAbout = new Intent(MainActivity.this, AboutActivity.class);
                 startActivity(intentAbout);
                 break;
 
             case R.id.logout:
                 logout();
+                Intent intentNav = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intentNav);
                 break;
         }
     }

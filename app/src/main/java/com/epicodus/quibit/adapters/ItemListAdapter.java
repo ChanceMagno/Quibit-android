@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import com.epicodus.quibit.ui.ItemDetail;
+import com.epicodus.quibit.ui.ItemDetailActivity;
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.models.Item;
 import com.squareup.picasso.Picasso;
@@ -97,7 +97,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         @Override
         public void onClick(View v){
             int itemPosition = getLayoutPosition();
-            Intent intent = new Intent(mContext, ItemDetail.class);
+            Intent intent = new Intent(mContext, ItemDetailActivity.class);
             Item item = mItems.get(itemPosition);
             intent.putExtra("item", Parcels.wrap(item));
             mContext.startActivity(intent);

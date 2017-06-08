@@ -1,22 +1,15 @@
 package com.epicodus.quibit.ui;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.Patterns;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.models.Goal;
-import com.epicodus.quibit.services.walmartService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class CreateGoal extends AppCompatActivity implements View.OnClickListener {
+public class CreateExchangeActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Bind(R.id.setGoalActionButton) FloatingActionButton mNextGoalButton;
     @Bind(R.id.editTextItem) EditText mEditTextItem;
@@ -60,8 +53,8 @@ public class CreateGoal extends AppCompatActivity implements View.OnClickListene
         clearTextFields();
         Goal newGoal = new Goal(item, itemCost, itemRate);
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
-        userRef.child("goal").setValue(newGoal);
-        Intent intent = new Intent(CreateGoal.this, MainActivity.class);
+        userRef.child("exchanges").push().setValue(newGoal);
+        Intent intent = new Intent(CreateExchangeActivity.this, MainActivity.class);
         startActivity(intent);
 
     }
