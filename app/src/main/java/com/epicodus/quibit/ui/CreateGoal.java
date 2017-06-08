@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.services.walmartService;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -54,6 +56,9 @@ public class CreateGoal extends AppCompatActivity implements View.OnClickListene
             toast.setGravity(Gravity.CENTER, 0, 100);
             toast.show();
         } else {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
+
+            userRef.push().child("goal").push().setValue("goal");
             Intent intent = new Intent(CreateGoal.this, MainActivity.class);
             intent.putExtra("item", item);
             intent.putExtra("itemCost", itemCost);
