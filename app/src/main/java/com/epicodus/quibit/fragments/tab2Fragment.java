@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.epicodus.quibit.R;
 
 public class tab2Fragment extends Fragment{
-    public static final String TAG = "tab1fragment";
+    public static final String TAG = "tab2fragment";
 
     @Nullable
     @Override

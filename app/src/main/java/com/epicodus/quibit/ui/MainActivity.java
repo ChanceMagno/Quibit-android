@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.logout:
 //                logout();
-                Intent intentNav = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intentNav = new Intent(MainActivity.this, TestActivity.class);
                 startActivity(intentNav);
                 break;
         }

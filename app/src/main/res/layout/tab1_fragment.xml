@@ -11,4 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.22"
         android:text="tab 1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnTest1"
+        android:text="testbutton1"/>
 </LinearLayout>

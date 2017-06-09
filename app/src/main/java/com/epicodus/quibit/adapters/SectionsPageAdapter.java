@@ -12,18 +12,17 @@ public class SectionsPageAdapter extends FragmentPagerAdapter{
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
-    public SectionsPageAdapter(FragmentManager fm) {
-        super(fm);
-    }
-
     public void addFragment(Fragment fragment, String title){
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
     }
+    public SectionsPageAdapter(FragmentManager fm) {
+        super(fm);
+    }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return super.getPageTitle(position);
+        return mFragmentTitleList.get(position);
     }
 
     @Override
