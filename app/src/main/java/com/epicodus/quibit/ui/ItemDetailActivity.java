@@ -49,7 +49,7 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
         switch (v.getId()) {
             case R.id.setGoalActionButton:
                 DatabaseReference goalRef = FirebaseDatabase.getInstance().getReference("goals");
-                goalRef.setValue(selectedItem);
+                goalRef.setValue(selectedItem.getItemId());
                 Intent intent = new Intent(ItemDetailActivity.this, CreateExchangeActivity.class);
                 startActivity(intent);
                 break;
