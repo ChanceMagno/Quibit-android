@@ -22,8 +22,8 @@ import android.widget.TextView;
 import com.epicodus.quibit.R;
 
 public class TestActivity extends AppCompatActivity {
-
-
+    public static final String TAG = "tabactivity";
+    private SectionsPageAdapter mSectionsPageAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
