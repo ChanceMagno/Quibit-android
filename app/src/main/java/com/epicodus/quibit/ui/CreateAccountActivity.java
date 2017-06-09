@@ -13,12 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.epicodus.quibit.R;
+import com.epicodus.quibit.models.UserProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -121,7 +124,9 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             public void onComplete(@NonNull Task<Void> task) {
                 mAuthProgressDialog.dismiss();
                 if (task.isSuccessful()){
-
+                    UserProfile newUser = new UserProfile(mName, user.getEmail());
+                    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("userInfo");
+                    userRef.setValue(newUser);
                 }
             }
         });

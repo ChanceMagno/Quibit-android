@@ -53,21 +53,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
 
-        mAuth = FirebaseAuth.getInstance();
 
         Typeface pacifico = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
-        Typeface salsa = Typeface.createFromAsset(getAssets(), "fonts/Salsa.ttf");
         mGetStartedText.setTypeface(pacifico);
 
         mAbout.setOnClickListener(this);
         Intent intent = getIntent();
          boolean goalStatus = Boolean.parseBoolean(intent.getStringExtra("goalSet"));
+        String item = intent.getStringExtra("item");
+        String itemCost = intent.getStringExtra("itemCost");
+        String itemMonthly = intent.getStringExtra("itemMonthly");
 
         if(goalStatus){
             goalSet = goalStatus;
             mGetStartedFloatingActionButton.setVisibility(View.GONE);
             mGetStartedFloatingActionButton.setVisibility(View.GONE);
             mGoalSearch.setVisibility(View.GONE);
+
         } else {
             mGetStartedFloatingActionButton.setOnClickListener(this);
         }
@@ -88,19 +90,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     toast.show();
                 } else {
                     mGoalSearch.setText("");
-                    Intent intent = new Intent(MainActivity.this, SearchRewards.class);
+                    Intent intent = new Intent(MainActivity.this, SearchGoalsActivity.class);
                     intent.putExtra("goalSearch", goalSearch);
                     startActivity(intent);
                 }
                 break;
 
             case R.id.about:
-                Intent intentAbout = new Intent(MainActivity.this, About.class);
+                Intent intentAbout = new Intent(MainActivity.this, AboutActivity.class);
                 startActivity(intentAbout);
                 break;
 
             case R.id.logout:
                 logout();
+                Intent intentNav = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intentNav);
                 break;
         }
     }

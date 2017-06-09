@@ -22,7 +22,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class SearchRewards extends AppCompatActivity {
+public class SearchGoalsActivity extends AppCompatActivity {
     public ArrayList<Item> mItemList = new ArrayList<>();
     private ItemListAdapter mAdapter;
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
@@ -50,13 +50,13 @@ public class SearchRewards extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 mItemList = newWalmartService.processResults(response);
 
-                SearchRewards.this.runOnUiThread(new Runnable() {
+                SearchGoalsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         findViewById(R.id.progressBar).setVisibility(View.GONE);
                         mAdapter = new ItemListAdapter(getApplicationContext(), mItemList);
                         mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(SearchRewards.this);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(SearchGoalsActivity.this);
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
 

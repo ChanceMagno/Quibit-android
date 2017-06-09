@@ -4,16 +4,16 @@ import org.parceler.Parcel;
 
 @Parcel
 public class Item {
-    private String mItemId;
-    private String mName;
-    private String mMsrp;
-    private String mSalePrice;
-    private String mDescription;
-    private String mThumbnailImage;
-    private String mMediumImage;
-    private String mLargeImage;
-    private String mRating;
-    private String mPurchaseLink;
+     String mItemId;
+     String mName;
+     String mMsrp;
+     String mSalePrice;
+     String mDescription;
+     String mThumbnailImage;
+     String mMediumImage;
+     String mLargeImage;
+     String mRating;
+     String mPurchaseLink;
 
     public Item(){
     }

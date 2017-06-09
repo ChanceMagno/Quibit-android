@@ -8,10 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.models.Item;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -19,7 +20,7 @@ import org.parceler.Parcels;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ItemDetail extends AppCompatActivity implements View.OnClickListener{
+public class ItemDetailActivity extends AppCompatActivity implements View.OnClickListener{
     @Bind(R.id.itemNameTextView) TextView mItemNameTextView;
     @Bind(R.id.setGoalActionButton) FloatingActionButton mSetItemAsGoalButton;
     @Bind(R.id.itemImageView) ImageView mItemImageView;
@@ -47,8 +48,10 @@ public class ItemDetail extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.setGoalActionButton:
-                Toast toast = Toast.makeText(ItemDetail.this, "Boo!", Toast.LENGTH_LONG);
-                toast.show();
+                DatabaseReference goalRef = FirebaseDatabase.getInstance().getReference("goals");
+                goalRef.setValue(selectedItem);
+                Intent intent = new Intent(ItemDetailActivity.this, CreateExchangeActivity.class);
+                startActivity(intent);
                 break;
             case R.id.itemViewOnlineActionButton:
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(selectedItem.getPurchaseLink()));
@@ -61,7 +64,7 @@ public class ItemDetail extends AppCompatActivity implements View.OnClickListene
         mItemNameTextView.setText(selectedItem.getName());
         mItemDescriptionTextView.setText(selectedItem.getDescription());
         mItemPriceTextView.setText(selectedItem.getSalePrice());
-        Picasso.with(ItemDetail.this).load(selectedItem.getLargeImage()).resize(MAX_WIDTH, MAX_HEIGHT).centerCrop().into(mItemImageView);
+        Picasso.with(ItemDetailActivity.this).load(selectedItem.getLargeImage()).resize(MAX_WIDTH, MAX_HEIGHT).centerCrop().into(mItemImageView);
     }
 }
 
