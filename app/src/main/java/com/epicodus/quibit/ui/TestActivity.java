@@ -1,5 +1,6 @@
 package com.epicodus.quibit.ui;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,27 +29,29 @@ import com.epicodus.quibit.fragments.tab3Fragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class TestActivity extends AppCompatActivity {
     public static final String TAG = "TAB1Fragment";
     private SectionsPageAdapter mSectionsPageAdapter;
     private ViewPager mViewPager;
 
-    Button testbutton;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
 
-         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        setupViewPager(mViewPager);
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_test);
+            ButterKnife.bind(this);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+             mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-    }
+            mViewPager = (ViewPager) findViewById(R.id.container);
+            setupViewPager(mViewPager);
+
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+            tabLayout.setupWithViewPager(mViewPager);
+        }
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
