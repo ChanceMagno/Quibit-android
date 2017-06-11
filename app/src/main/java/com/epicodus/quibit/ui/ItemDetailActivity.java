@@ -1,7 +1,9 @@
 package com.epicodus.quibit.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.epicodus.quibit.R;
+import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.models.Item;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,6 +25,8 @@ import org.parceler.Parcels;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static java.lang.Integer.parseInt;
+
 public class ItemDetailActivity extends AppCompatActivity implements View.OnClickListener{
     @Bind(R.id.itemNameTextView) TextView mItemNameTextView;
     @Bind(R.id.setGoalActionButton) FloatingActionButton mSetItemAsGoalButton;
@@ -29,6 +34,8 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     @Bind(R.id.itemDescriptionTextView) TextView mItemDescriptionTextView;
     @Bind(R.id.itemViewOnlineActionButton) FloatingActionButton mItemViewOnlineButton;
     @Bind(R.id.itemPriceTextView) TextView mItemPriceTextView;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
     private static final int MAX_WIDTH = 375;
     private static final int MAX_HEIGHT = 145;
     Item selectedItem;
@@ -41,7 +48,8 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_item_detail);
         ButterKnife.bind(this);
 
-
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
         selectedItem = Parcels.unwrap(getIntent().getParcelableExtra("item"));
         mItemViewOnlineButton.setOnClickListener(this);
         mSetItemAsGoalButton.setOnClickListener(this);
@@ -52,18 +60,24 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.setGoalActionButton:
+                addToSharedPreferences(selectedItem.getSalePrice());
                 mAuth = FirebaseAuth.getInstance();
                 FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
                 DatabaseReference goalRef = FirebaseDatabase.getInstance().getReference("users").child(mUser.getUid()).child("goal");
                 goalRef.setValue(selectedItem);
                 Intent intent = new Intent(ItemDetailActivity.this, CreateQuibitActivity.class);
                 startActivity(intent);
+
                 break;
             case R.id.itemViewOnlineActionButton:
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(selectedItem.getPurchaseLink()));
                 startActivity(webIntent);
                 break;
         }
+    }
+
+    private void addToSharedPreferences(String salePrice){
+        mEditor.putString(Constants.PREFERENCES_GOALVALUE_KEY, salePrice).apply();
     }
 
     public void setContent(Item selectedItem){

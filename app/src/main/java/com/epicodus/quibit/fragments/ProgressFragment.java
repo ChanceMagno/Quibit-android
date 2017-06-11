@@ -2,9 +2,11 @@ package com.epicodus.quibit.fragments;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.epicodus.quibit.R;
+import com.epicodus.quibit.constants.Constants;
+import com.epicodus.quibit.models.Item;
 import com.epicodus.quibit.models.Quibit;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarEntry;
@@ -36,8 +40,11 @@ import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 public class ProgressFragment extends Fragment {
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
     public static final String TAG = "Progressfragment";
     private DatabaseReference mQuibitsReference;
+    private DatabaseReference mItemReference;
     private FirebaseAuth mAuth;
     final ArrayList<Quibit> quibits = new ArrayList<>();
     PieChart pieChart ;
@@ -46,9 +53,7 @@ public class ProgressFragment extends Fragment {
     PieDataSet pieDataSet ;
     PieData pieData ;
     Integer savedAmount = 0;
-
-
-
+    Integer goalValue;
 
     @Nullable
     @Override
@@ -57,13 +62,16 @@ public class ProgressFragment extends Fragment {
         FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
         createPieChart(view);
         mAuth = FirebaseAuth.getInstance();
-        callDatabase(view);
+        getQuibitInfo(view);
+        setGoalValue();
         return view;
     }
 
     public void calculatePercentage(){
-
-        Double percentage = (double) savedAmount / 1000 * 100;
+        if (goalValue == 0){
+            savedAmount = 0;
+        }
+        Double percentage = (double) savedAmount / goalValue * 100;
         savedAmount = percentage.intValue() ;
     }
 
@@ -98,7 +106,7 @@ public class ProgressFragment extends Fragment {
         PieEntryLabels.add("Percent Saved");
     }
 
-    public void callDatabase(final View view){
+    public void getQuibitInfo(final View view) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final ArrayList<Quibit> quibits = new ArrayList<>();
         mQuibitsReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges");
@@ -108,21 +116,30 @@ public class ProgressFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     quibits.add(snapshot.getValue(Quibit.class));
                 }
-                for (int i = 0; i < quibits.size(); i++){
+                for (int i = 0; i < quibits.size(); i++) {
                     Integer amount = Math.round(parseFloat(quibits.get(i).getExchangeCost()));
                     savedAmount += amount;
                 }
+
                 calculatePercentage();
                 createPieChart(view);
-
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
-
     }
 
+    public void setGoalValue(){
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+       String preference = mSharedPreferences.getString(Constants.PREFERENCES_GOALVALUE_KEY, null);
+            if (preference != null){
+
+                goalValue = Math.round(parseFloat(preference));
+                Log.i("goalvalue", goalValue.toString());
+
+            } else {goalValue = 0;}
+    }
 }
