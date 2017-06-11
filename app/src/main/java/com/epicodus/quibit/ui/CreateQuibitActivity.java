@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class CreateExchangeActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateQuibitActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Bind(R.id.setGoalActionButton) FloatingActionButton mNextGoalButton;
     @Bind(R.id.editTextItem) EditText mEditTextItem;
@@ -54,7 +54,7 @@ public class CreateExchangeActivity extends AppCompatActivity implements View.On
         Quibit newGoal = new Quibit(item, itemCost, itemRate);
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
         userRef.child("exchanges").push().setValue(newGoal);
-        Intent intent = new Intent(CreateExchangeActivity.this, MainActivity.class);
+        Intent intent = new Intent(CreateQuibitActivity.this, MainActivity.class);
         startActivity(intent);
 
     }

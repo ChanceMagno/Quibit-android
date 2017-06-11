@@ -50,7 +50,7 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
             case R.id.setGoalActionButton:
                 DatabaseReference goalRef = FirebaseDatabase.getInstance().getReference("goals");
                 goalRef.setValue(selectedItem.getItemId());
-                Intent intent = new Intent(ItemDetailActivity.this, CreateExchangeActivity.class);
+                Intent intent = new Intent(ItemDetailActivity.this, CreateQuibitActivity.class);
                 startActivity(intent);
                 break;
             case R.id.itemViewOnlineActionButton:

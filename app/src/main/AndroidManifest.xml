@@ -23,7 +23,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.quibit.ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.CreateExchangeActivity">
+        <activity android:name=".ui.CreateQuibitActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.quibit.ui.ItemDetailActivity" />

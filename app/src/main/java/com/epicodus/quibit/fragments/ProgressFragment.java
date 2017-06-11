@@ -74,10 +74,9 @@ public class ProgressFragment extends Fragment {
     pieDataSet = new PieDataSet(entries, "");
     addValuesToPieEntryLabels();
      pieData = new PieData(PieEntryLabels, pieDataSet);
-     pieDataSet.setColors(ColorTemplate.LIBERTY_COLORS);
      pieChart.setData(pieData);
      pieChart.animateY(5000);
-     pieData.setValueTextSize(10);
+     pieData.setValueTextSize(14);
         Typeface pacifico = Typeface.createFromAsset(getActivity().getAssets(), "fonts/peralta.ttf");
      pieDataSet.setValueTypeface(pacifico);
      pieChart.setDescription("Your Quibit Progress");
@@ -108,7 +107,6 @@ public class ProgressFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     quibits.add(snapshot.getValue(Quibit.class));
-
                 }
                 for (int i = 0; i < quibits.size(); i++){
                     Integer amount = Math.round(parseFloat(quibits.get(i).getExchangeCost()));
