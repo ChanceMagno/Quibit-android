@@ -9,7 +9,7 @@ public class Quibit {
     String exchangeItem;
     String exchangeCost;
     String exchangeOccurenceRate;
-    String goalCreationDate;
+    String quibitCreationDate;
 
     Quibit(){}
 
@@ -17,7 +17,7 @@ public class Quibit {
         this.exchangeItem = exchangeItem;
         this.exchangeCost = exchangeCost;
         this.exchangeOccurenceRate = exchangeOccurenceRate;
-        this.goalCreationDate =  DateFormat.getDateTimeInstance().format(new Date());
+        this.quibitCreationDate =  DateFormat.getDateTimeInstance().format(new Date());
 
     }
 
@@ -35,7 +35,7 @@ public class Quibit {
     }
 
     public String getGoalCreationDate() {
-        return goalCreationDate;
+        return quibitCreationDate;
     }
 }
 

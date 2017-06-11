@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.models.Item;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -30,6 +32,7 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     private static final int MAX_WIDTH = 375;
     private static final int MAX_HEIGHT = 145;
     Item selectedItem;
+    FirebaseAuth mAuth;
 
 
     @Override
@@ -37,6 +40,7 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
         ButterKnife.bind(this);
+
 
         selectedItem = Parcels.unwrap(getIntent().getParcelableExtra("item"));
         mItemViewOnlineButton.setOnClickListener(this);
@@ -48,8 +52,10 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.setGoalActionButton:
-                DatabaseReference goalRef = FirebaseDatabase.getInstance().getReference("goals");
-                goalRef.setValue(selectedItem.getItemId());
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+                DatabaseReference goalRef = FirebaseDatabase.getInstance().getReference("users").child(mUser.getUid()).child("goal");
+                goalRef.setValue(selectedItem);
                 Intent intent = new Intent(ItemDetailActivity.this, CreateQuibitActivity.class);
                 startActivity(intent);
                 break;
