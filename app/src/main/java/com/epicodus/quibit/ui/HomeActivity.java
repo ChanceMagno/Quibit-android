@@ -9,7 +9,7 @@ import android.os.Bundle;
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.adapters.SectionsPageAdapter;
 import com.epicodus.quibit.fragments.tab1Fragment;
-import com.epicodus.quibit.fragments.tab2Fragment;
+import com.epicodus.quibit.fragments.ProgressFragment;
 import com.epicodus.quibit.fragments.QuibitsFragment;
 
 import butterknife.ButterKnife;
@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new tab1Fragment(), "About Us");
-        adapter.addFragment(new tab2Fragment(), "Progress");
+        adapter.addFragment(new ProgressFragment(), "Progress");
         adapter.addFragment(new QuibitsFragment(), "Quibits");
         viewPager.setAdapter(adapter);
     }
