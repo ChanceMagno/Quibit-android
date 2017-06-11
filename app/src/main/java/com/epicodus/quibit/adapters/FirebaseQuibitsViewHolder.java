@@ -32,7 +32,6 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
 
     public void bindQuibit(Quibit quibit){
         TextView quibitItemTextView = (TextView) mView.findViewById(R.id.quibitTextView);
-
         quibitItemTextView.setText(quibit.getExchangeItem());
     }
 
