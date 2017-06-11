@@ -1,21 +1,26 @@
 package com.epicodus.quibit.models;
 
+import org.parceler.Parcel;
+
 import java.text.DateFormat;
 import java.util.Date;
-
-public class Goal {
+@Parcel
+public class Quibit {
     String exchangeItem;
     String exchangeCost;
     String exchangeOccurenceRate;
-    String goalCreationDate;
+    String quibitCreationDate;
 
-    public Goal(String exchangeItem, String exchangeCost, String exchangeOccurenceRate) {
+    Quibit(){}
+
+    public Quibit(String exchangeItem, String exchangeCost, String exchangeOccurenceRate) {
         this.exchangeItem = exchangeItem;
         this.exchangeCost = exchangeCost;
         this.exchangeOccurenceRate = exchangeOccurenceRate;
-        this.goalCreationDate =  DateFormat.getDateTimeInstance().format(new Date());
+        this.quibitCreationDate =  DateFormat.getDateTimeInstance().format(new Date());
 
     }
+
 
     public String getExchangeItem() {
         return exchangeItem;
@@ -29,8 +34,8 @@ public class Goal {
         return exchangeOccurenceRate;
     }
 
-    public String getGoalCreationDate() {
-        return goalCreationDate;
+    public String getQuibitCreationDate() {
+        return quibitCreationDate;
     }
 }
 

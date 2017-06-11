@@ -51,9 +51,9 @@
             android:name=".ui.CreateAccountActivity"
             android:label="Create Account" />
         <activity
-            android:name=".ui.TestActivity"
+            android:name=".ui.HomeActivity"
             android:label="@string/title_activity_test"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.epicodus.quibit.R;
-import com.epicodus.quibit.models.Goal;
+import com.epicodus.quibit.models.Quibit;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -51,7 +51,7 @@ public class CreateExchangeActivity extends AppCompatActivity implements View.On
 
 
         clearTextFields();
-        Goal newGoal = new Goal(item, itemCost, itemRate);
+        Quibit newGoal = new Quibit(item, itemCost, itemRate);
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
         userRef.child("exchanges").push().setValue(newGoal);
         Intent intent = new Intent(CreateExchangeActivity.this, MainActivity.class);
