@@ -148,7 +148,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final ArrayList<Quibit> quibits = new ArrayList<>();
             mQuibitsReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges");
-            mQuibitsReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            mQuibitsReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -174,6 +174,12 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
                 goalValue = Math.round(parseFloat(mSavedPreferenceValue));
             } else { goalValue = 0;
             }
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+
     }
 
 }
