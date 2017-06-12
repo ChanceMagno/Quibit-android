@@ -9,9 +9,11 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.constants.Constants;
@@ -56,6 +58,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     String mSavedPreferenceValue;
     String mSavedAmountPreferenceValue;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,7 +71,6 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
          mSharedPreferenceSavedAmount = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mSavedAmountEditor =  mSharedPreferenceSavedAmount.edit();
         mSavedAmountPreferenceValue =  mSharedPreferenceSavedAmount.getString(Constants.PREFERENCES_SAVEDAMOUNT_KEY, "0");
-
         savedAmount = Math.round(parseFloat(mSavedAmountPreferenceValue));
 
         FloatingActionButton addQuibitActionButton = (FloatingActionButton) view.findViewById(R.id.addQuibitfloatingActionButton);
@@ -83,8 +85,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
 
         setGoalValue();
 
-        getQuibitInfo(view);
-
+        getQuibitInfo();
         return view;
     }
 
@@ -143,7 +144,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         PieEntryLabels.add("Percent Saved");
     }
 
-    public void getQuibitInfo(final View view) {
+    public void getQuibitInfo() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final ArrayList<Quibit> quibits = new ArrayList<>();
             mQuibitsReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges");
@@ -154,15 +155,16 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
                     quibits.add(snapshot.getValue(Quibit.class));
                 }
                 for (int i = 0; i < quibits.size(); i++) {
-                    Integer amount = Math.round(parseFloat(quibits.get(i).getExchangeCost()));
+                    Integer amount = Math.round(quibits.get(i).getTotalQuibits());
                     savedAmount += amount;
                 }
-
                 calculatePercentage();
-                createPieChart(view);
+                createPieChart(getView());
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                Log.i("here", "here");
             }
         });
     }
