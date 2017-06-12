@@ -4,11 +4,13 @@ import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.LongSparseArray;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.epicodus.quibit.R;
+import com.epicodus.quibit.fragments.ProgressFragment;
 import com.epicodus.quibit.models.Quibit;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,12 +63,11 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
                 switch (view.getId()) {
             case R.id.saveMoneyQuibitButton:
                 mAuth = FirebaseAuth.getInstance();
-                Toast.makeText(view.getContext(), "This part is still under construction " + quibits.get(itemPosition).getGoalCreationDate(), Toast.LENGTH_LONG).show();
                 Float amount = parseFloat(quibits.get(itemPosition).getExchangeCost());
-                Float totalAmount = parseFloat(quibits.get(itemPosition).getTotalQuibits());
+                int totalAmount = quibits.get(itemPosition).getTotalQuibits();
                 totalAmount += amount;
-                String key = quibitsKey.get(itemPosition);
-                DatabaseReference updateRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges").child(key).child("totalQuibits");
+                String quibitKey = quibitsKey.get(itemPosition);
+                DatabaseReference updateRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges").child(quibitKey).child("totalQuibits");
                 updateRef.setValue(totalAmount);
                 break;
         }
