@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,9 +157,11 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     }
 
     public void setGoalValue(){
-            if (mSavedPreferenceValue != null){
+            if (mSavedPreferenceValue != "goalValue"){
                 goalValue = Math.round(parseFloat(mSavedPreferenceValue));
             } else {goalValue = 0;
+                Log.i("preference", mSavedPreferenceValue);
+
             }
     }
 
