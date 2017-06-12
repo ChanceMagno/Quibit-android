@@ -50,15 +50,6 @@ public class QuibitsFragment extends Fragment{
         return view;
     }
 
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.saveMoneyQuibitButton:
-//                Toast.makeText(getActivity(), "This part is still under construction", Toast.LENGTH_LONG).show();
-//                break;
-//        }
-//    }
-
     private void setUpFireBaseAdapter(View view){
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Quibit, FirebaseQuibitsViewHolder>
                 (Quibit.class, R.layout.quibit_fragment, FirebaseQuibitsViewHolder.class, mQuibitsReference){
