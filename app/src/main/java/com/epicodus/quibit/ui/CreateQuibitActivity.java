@@ -34,7 +34,6 @@ public class CreateQuibitActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_goal);
         ButterKnife.bind(this);
-
         mNextGoalButton.setOnClickListener(this);
 
     }

@@ -1,9 +1,11 @@
 package com.epicodus.quibit.adapters;
 
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.models.Quibit;
@@ -27,7 +29,8 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
+        FloatingActionButton mSaveMoneyQuibitButton = (FloatingActionButton) itemView.findViewById(R.id.saveMoneyQuibitButton);
+        mSaveMoneyQuibitButton.setOnClickListener(this);
     }
 
     public void bindQuibit(Quibit quibit){
@@ -46,9 +49,12 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     quibits.add(snapshot.getValue(Quibit.class));
                 }
-
                 int itemPosition = getLayoutPosition();
-
+                switch (view.getId()) {
+            case R.id.saveMoneyQuibitButton:
+                Toast.makeText(view.getContext(), "This part is still under construction " + quibits.get(itemPosition).getGoalCreationDate(), Toast.LENGTH_LONG).show();
+                break;
+        }
             }
 
             @Override
@@ -57,6 +63,8 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
             }
 
         });
+
+
     }
 
 
