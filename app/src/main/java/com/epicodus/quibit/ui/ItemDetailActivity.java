@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,10 +23,15 @@ import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
+import java.text.DecimalFormat;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static java.lang.Double.parseDouble;
+import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
+import static java.lang.Math.round;
 
 public class ItemDetailActivity extends AppCompatActivity implements View.OnClickListener{
     @Bind(R.id.itemNameTextView) TextView mItemNameTextView;
@@ -40,6 +46,7 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     private static final int MAX_HEIGHT = 145;
     Item selectedItem;
     FirebaseAuth mAuth;
+    String goalValue;
 
 
     @Override
@@ -49,7 +56,9 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
         ButterKnife.bind(this);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        goalValue = mSharedPreferences.getString(Constants.PREFERENCES_GOALVALUE_KEY, null);
         mEditor = mSharedPreferences.edit();
+
         selectedItem = Parcels.unwrap(getIntent().getParcelableExtra("item"));
         mItemViewOnlineButton.setOnClickListener(this);
         mSetItemAsGoalButton.setOnClickListener(this);
@@ -60,7 +69,7 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.setGoalActionButton:
-                addToSharedPreferences(selectedItem.getSalePrice());
+                addToSharedPreferences();
                 mAuth = FirebaseAuth.getInstance();
                 FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
                 DatabaseReference goalRef = FirebaseDatabase.getInstance().getReference("users").child(mUser.getUid()).child("goal");
@@ -76,8 +85,10 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    private void addToSharedPreferences(String salePrice){
-        mEditor.putString(Constants.PREFERENCES_GOALVALUE_KEY, salePrice).apply();
+    private void addToSharedPreferences(){
+        goalValue = selectedItem.getSalePrice();
+        mEditor.putString(Constants.PREFERENCES_GOALVALUE_KEY, goalValue).apply();
+        Log.i("Shared pref location", goalValue);
     }
 
     public void setContent(Item selectedItem){

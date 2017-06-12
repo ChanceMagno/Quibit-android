@@ -1,26 +1,20 @@
 package com.epicodus.quibit.fragments;
 
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.constants.Constants;
-import com.epicodus.quibit.models.Item;
 import com.epicodus.quibit.models.Quibit;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.BubbleEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -32,12 +26,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-
-import static java.lang.Double.parseDouble;
 import static java.lang.Float.parseFloat;
-import static java.lang.Integer.parseInt;
+
 
 public class ProgressFragment extends Fragment {
     private SharedPreferences mSharedPreferences;
@@ -53,17 +44,23 @@ public class ProgressFragment extends Fragment {
     PieDataSet pieDataSet ;
     PieData pieData ;
     Integer savedAmount = 0;
-    Integer goalValue;
+    Integer goalValue = 0;
+    String mSavedPreferenceValue;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.progress_fragment, container, false);
         FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mEditor = mSharedPreferences.edit();
+        mSavedPreferenceValue = mSharedPreferences.getString(Constants.PREFERENCES_GOALVALUE_KEY, "goalValue");
+
         createPieChart(view);
         mAuth = FirebaseAuth.getInstance();
-        getQuibitInfo(view);
         setGoalValue();
+        getQuibitInfo(view);
         return view;
     }
 
@@ -76,22 +73,21 @@ public class ProgressFragment extends Fragment {
     }
 
     public void createPieChart(View view){
-     pieChart = (PieChart)view.findViewById(R.id.chart1);
-     PieEntryLabels = new ArrayList<String>();
-    addValuesToPIEENTRY();
-    pieDataSet = new PieDataSet(entries, "");
-    addValuesToPieEntryLabels();
-     pieData = new PieData(PieEntryLabels, pieDataSet);
-     pieChart.setData(pieData);
-     pieChart.animateY(5000);
-     pieData.setValueTextSize(14);
+        pieChart = (PieChart)view.findViewById(R.id.chart1);
+        PieEntryLabels = new ArrayList<String>();
+        addValuesToPIEENTRY();
+        pieDataSet = new PieDataSet(entries, "");
+        addValuesToPieEntryLabels();
+        pieData = new PieData(PieEntryLabels, pieDataSet);
+        pieChart.setData(pieData);
+        pieChart.animateY(5000);
+        pieData.setValueTextSize(14);
         Typeface pacifico = Typeface.createFromAsset(getActivity().getAssets(), "fonts/peralta.ttf");
-     pieDataSet.setValueTypeface(pacifico);
-     pieChart.setDescription("Your Quibit Progress");
-     pieChart.setDrawHoleEnabled(true);
-     pieChart.setHoleColor(ColorTemplate.COLOR_SKIP);
-     pieDataSet.setColors(new int[] { R.color.colorPrimary, R.color.positiveColor }, getActivity());
-
+        pieDataSet.setValueTypeface(pacifico);
+        pieChart.setDescription("Your Quibit Progress");
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleColor(ColorTemplate.COLOR_SKIP);
+        pieDataSet.setColors(new int[] { R.color.colorPrimary, R.color.positiveColor }, getActivity());
  }
 
     public void addValuesToPIEENTRY(){
@@ -120,26 +116,20 @@ public class ProgressFragment extends Fragment {
                     Integer amount = Math.round(parseFloat(quibits.get(i).getExchangeCost()));
                     savedAmount += amount;
                 }
-
                 calculatePercentage();
                 createPieChart(view);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
 
     public void setGoalValue(){
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-       String preference = mSharedPreferences.getString(Constants.PREFERENCES_GOALVALUE_KEY, null);
-            if (preference != null){
-
-                goalValue = Math.round(parseFloat(preference));
-                Log.i("goalvalue", goalValue.toString());
-
-            } else {goalValue = 0;}
+            if (mSavedPreferenceValue != null){
+                goalValue = Math.round(parseFloat(mSavedPreferenceValue));
+            } else {goalValue = 0;
+            }
     }
+
 }

@@ -8,6 +8,6 @@ public class Constants {
     public static final String WALMART_QUERY_PARAMETER = "query";
     public static final String WALMART_FORMAT_PARAMETER = "format";
     public static final String WALMART_NUMBER_PARAMETER = "numItems";
-    public static final String PREFERENCES_GOALVALUE_KEY = "100";
+    public static final String PREFERENCES_GOALVALUE_KEY = "goalValue";
 }
 
