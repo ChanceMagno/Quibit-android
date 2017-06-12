@@ -23,7 +23,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.quibit.ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.CreateExchangeActivity">
+        <activity android:name=".ui.CreateQuibitActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.quibit.ui.ItemDetailActivity" />
@@ -50,6 +50,10 @@
         <activity
             android:name=".ui.CreateAccountActivity"
             android:label="Create Account" />
+        <activity
+            android:name=".ui.HomeActivity"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

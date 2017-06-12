@@ -53,7 +53,6 @@ public class SearchGoalsActivity extends AppCompatActivity {
                 SearchGoalsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        findViewById(R.id.progressBar).setVisibility(View.GONE);
                         mAdapter = new ItemListAdapter(getApplicationContext(), mItemList);
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(SearchGoalsActivity.this);

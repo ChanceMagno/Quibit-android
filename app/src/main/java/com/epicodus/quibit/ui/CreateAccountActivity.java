@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -51,7 +52,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         mCreateUserButton.setOnClickListener(this);
 
         createAuthStateListener();
-        createAuthProgressDialog();
+
 
     }
 
@@ -70,6 +71,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
     private void createNewUser(){
         mName = mNameEditText.getText().toString().trim();
+        createAuthProgressDialog();
         final String email = mEmailEditText.getText().toString().trim();
         String password = mPasswordEditText.getText().toString().trim();
         String confirmPassword = mConfirmPasswordEditText.getText().toString().trim();
@@ -88,7 +90,6 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         mAuthProgressDialog.dismiss();
                          if(task.isSuccessful()){
-                             createFirebaseUserProfile(task.getResult().getUser());
                              sendVerificationEmail();
                         } else {
                              Toast.makeText(CreateAccountActivity.this, "authentication failed", Toast.LENGTH_LONG).show();
@@ -99,14 +100,12 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
     private void sendVerificationEmail(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     startActivity(new Intent(CreateAccountActivity.this, LoginActivity.class));
                     finish();
-
                 } else {
                     Toast.makeText(CreateAccountActivity.this, "Email failed to send", Toast.LENGTH_SHORT).show();
 
@@ -115,22 +114,6 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         });
     }
 
-    private void createFirebaseUserProfile(final FirebaseUser user){
-        UserProfileChangeRequest addProfileName = new UserProfileChangeRequest.Builder()
-                .setDisplayName(mName).build();
-
-        user.updateProfile(addProfileName).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                mAuthProgressDialog.dismiss();
-                if (task.isSuccessful()){
-                    UserProfile newUser = new UserProfile(mName, user.getEmail());
-                    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("userInfo");
-                    userRef.setValue(newUser);
-                }
-            }
-        });
-    }
 
     private void createAuthStateListener(){
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -177,8 +160,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
     private void createAuthProgressDialog() {
         mAuthProgressDialog = new ProgressDialog(this);
-        mAuthProgressDialog.setTitle("Loading...");
-        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
+        mAuthProgressDialog.setTitle("Creating your account");
+        mAuthProgressDialog.setMessage(String.format("Thanks for registering %s!", mName));
         mAuthProgressDialog.setCancelable(false);
     }
 
