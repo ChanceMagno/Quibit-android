@@ -1,18 +1,25 @@
 package com.epicodus.quibit.fragments;
 
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.models.Quibit;
+import com.epicodus.quibit.ui.CreateQuibitActivity;
+import com.epicodus.quibit.ui.MainActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
@@ -27,10 +34,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
+
+import butterknife.OnClick;
+
 import static java.lang.Float.parseFloat;
 
 
-public class ProgressFragment extends Fragment {
+public class ProgressFragment extends Fragment implements View.OnClickListener {
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     public static final String TAG = "Progressfragment";
@@ -51,11 +61,15 @@ public class ProgressFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.progress_fragment, container, false);
-        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mEditor = mSharedPreferences.edit();
         mSavedPreferenceValue = mSharedPreferences.getString(Constants.PREFERENCES_GOALVALUE_KEY, "goalValue");
+
+        FloatingActionButton addQuibitActionButton = (FloatingActionButton) view.findViewById(R.id.addQuibitfloatingActionButton);
+        addQuibitActionButton.setOnClickListener(this);
+        FloatingActionButton setGoalActionButton = (FloatingActionButton) view.findViewById(R.id.setGoalfloatingActionButton);
+        setGoalActionButton.setOnClickListener(this);
 
         createPieChart(view);
         mAuth = FirebaseAuth.getInstance();
@@ -63,6 +77,23 @@ public class ProgressFragment extends Fragment {
         getQuibitInfo(view);
         return view;
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.setGoalfloatingActionButton:
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.addQuibitfloatingActionButton:
+                Intent intent1 = new Intent(getActivity(), CreateQuibitActivity.class);
+                startActivity(intent1);
+                break;
+        }
+    }
+
+
+
 
     public void calculatePercentage(){
         if (goalValue == 0){
@@ -105,8 +136,8 @@ public class ProgressFragment extends Fragment {
     public void getQuibitInfo(final View view) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final ArrayList<Quibit> quibits = new ArrayList<>();
-        mQuibitsReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges");
-        mQuibitsReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            mQuibitsReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges");
+            mQuibitsReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -131,5 +162,7 @@ public class ProgressFragment extends Fragment {
             } else {goalValue = 0;
             }
     }
+
+
 
 }
