@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.adapters.SectionsPageAdapter;
@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_test);
+            setContentView(R.layout.acitivity_home);
             ButterKnife.bind(this);
 
             mAuth = FirebaseAuth.getInstance();
@@ -60,9 +60,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new tab1Fragment(), "About Us");
         adapter.addFragment(new ProgressFragment(), "Progress");
         adapter.addFragment(new QuibitsFragment(), "Quibits");
+        adapter.addFragment(new tab1Fragment(), "About Us");
         viewPager.setAdapter(adapter);
     }
 
@@ -80,13 +80,4 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
-
-
-
-
-
-
-
-
-
 }

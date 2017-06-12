@@ -54,7 +54,7 @@ public class CreateQuibitActivity extends AppCompatActivity implements View.OnCl
         Quibit newGoal = new Quibit(item, itemCost, itemRate);
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
         userRef.child("exchanges").push().setValue(newGoal);
-        Intent intent = new Intent(CreateQuibitActivity.this, MainActivity.class);
+        Intent intent = new Intent(CreateQuibitActivity.this, HomeActivity.class);
         startActivity(intent);
 
     }

@@ -74,7 +74,7 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
                 FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
                 DatabaseReference goalRef = FirebaseDatabase.getInstance().getReference("users").child(mUser.getUid()).child("goal");
                 goalRef.setValue(selectedItem);
-                Intent intent = new Intent(ItemDetailActivity.this, CreateQuibitActivity.class);
+                Intent intent = new Intent(ItemDetailActivity.this, HomeActivity.class);
                 startActivity(intent);
 
                 break;
