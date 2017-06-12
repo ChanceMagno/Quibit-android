@@ -96,7 +96,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         if (goalValue == 0){
             savedAmount = 0;
         } else if(goalValue < savedAmount) {
-            savedAmount = 0;
+            savedAmount = goalValue;
         }
         Double percentage = (double) savedAmount / goalValue * 100;
         savedAmount = percentage.intValue() ;
