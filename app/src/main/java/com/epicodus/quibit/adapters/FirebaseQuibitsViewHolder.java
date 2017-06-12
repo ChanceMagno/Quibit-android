@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.models.Quibit;
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -66,6 +67,8 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
 
 
     }
+
+
 
 
 

@@ -1,7 +1,6 @@
 package com.epicodus.quibit.fragments;
 
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -10,11 +9,9 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.constants.Constants;
@@ -36,14 +33,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
-import butterknife.OnClick;
-
 import static java.lang.Float.parseFloat;
 
 
 public class ProgressFragment extends Fragment implements View.OnClickListener {
     private SharedPreferences mSharedPreferences;
+    private SharedPreferences mSharedPreferenceSavedAmount;
     private SharedPreferences.Editor mEditor;
+    private SharedPreferences.Editor mSavedAmountEditor;
     public static final String TAG = "Progressfragment";
     private DatabaseReference mQuibitsReference;
     private DatabaseReference mItemReference;
@@ -54,9 +51,10 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     ArrayList<String> PieEntryLabels ;
     PieDataSet pieDataSet ;
     PieData pieData ;
-    Integer savedAmount = 0;
+    Integer savedAmount;
     Integer goalValue = 0;
     String mSavedPreferenceValue;
+    String mSavedAmountPreferenceValue;
 
     @Nullable
     @Override
@@ -67,15 +65,26 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         mEditor = mSharedPreferences.edit();
         mSavedPreferenceValue = mSharedPreferences.getString(Constants.PREFERENCES_GOALVALUE_KEY, "goalValue");
 
+         mSharedPreferenceSavedAmount = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mSavedAmountEditor =  mSharedPreferenceSavedAmount.edit();
+        mSavedAmountPreferenceValue =  mSharedPreferenceSavedAmount.getString(Constants.PREFERENCES_SAVEDAMOUNT_KEY, "0");
+
+        savedAmount = Math.round(parseFloat(mSavedAmountPreferenceValue));
+
         FloatingActionButton addQuibitActionButton = (FloatingActionButton) view.findViewById(R.id.addQuibitfloatingActionButton);
         addQuibitActionButton.setOnClickListener(this);
+
         FloatingActionButton setGoalActionButton = (FloatingActionButton) view.findViewById(R.id.setGoalfloatingActionButton);
         setGoalActionButton.setOnClickListener(this);
 
         createPieChart(view);
+
         mAuth = FirebaseAuth.getInstance();
+
         setGoalValue();
+
         getQuibitInfo(view);
+
         return view;
     }
 
@@ -100,7 +109,8 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
             savedAmount = goalValue;
         }
         Double percentage = (double) savedAmount / goalValue * 100;
-        savedAmount = percentage.intValue() ;
+        savedAmount = Math.round(percentage.intValue());
+        mSavedAmountEditor.putString(Constants.PREFERENCES_SAVEDAMOUNT_KEY, savedAmount.toString()).apply();
     }
 
     public void createPieChart(View view){
@@ -147,6 +157,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
                     Integer amount = Math.round(parseFloat(quibits.get(i).getExchangeCost()));
                     savedAmount += amount;
                 }
+
                 calculatePercentage();
                 createPieChart(view);
             }
@@ -159,12 +170,8 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     public void setGoalValue(){
             if (mSavedPreferenceValue != "goalValue"){
                 goalValue = Math.round(parseFloat(mSavedPreferenceValue));
-            } else {goalValue = 0;
-                Log.i("preference", mSavedPreferenceValue);
-
+            } else { goalValue = 0;
             }
     }
-
-
 
 }

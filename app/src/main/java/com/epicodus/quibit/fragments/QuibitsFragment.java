@@ -74,4 +74,11 @@ public class QuibitsFragment extends Fragment{
         mRecyclerView.setAdapter(mFirebaseAdapter);
     }
 
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        mFirebaseAdapter.cleanup();
+    }
+
 }

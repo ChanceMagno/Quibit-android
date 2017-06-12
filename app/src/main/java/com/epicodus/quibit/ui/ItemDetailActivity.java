@@ -88,7 +88,6 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     private void addToSharedPreferences(){
         goalValue = selectedItem.getSalePrice();
         mEditor.putString(Constants.PREFERENCES_GOALVALUE_KEY, goalValue).apply();
-        Log.i("Shared pref location", goalValue);
     }
 
     public void setContent(Item selectedItem){
@@ -97,6 +96,7 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
         mItemPriceTextView.setText(selectedItem.getSalePrice());
         Picasso.with(ItemDetailActivity.this).load(selectedItem.getLargeImage()).resize(MAX_WIDTH, MAX_HEIGHT).centerCrop().into(mItemImageView);
     }
+
 }
 
 
