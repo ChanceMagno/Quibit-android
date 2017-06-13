@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.fragments.ProgressFragment;
+import com.epicodus.quibit.fragments.QuibitsFragment;
 import com.epicodus.quibit.models.Quibit;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -71,12 +72,9 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
                 break;
         }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError){
-
             }
-
         });
 
     }
