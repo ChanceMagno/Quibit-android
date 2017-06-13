@@ -49,28 +49,27 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
 
     @Override
     public void onClick(final View view){
-        final ArrayList<Quibit> quibits = new ArrayList<>();
-        final ArrayList<String> quibitsKey = new ArrayList<>();
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                final ArrayList<Quibit> quibits = new ArrayList<>();
+                final ArrayList<String> quibitsKey = new ArrayList<>();
+
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     quibitsKey.add(snapshot.getKey());
                     quibits.add(snapshot.getValue(Quibit.class));
                 }
+
                 int itemPosition = getLayoutPosition();
-                switch (view.getId()) {
-            case R.id.saveMoneyQuibitButton:
-                mAuth = FirebaseAuth.getInstance();
-                Float amount = parseFloat(quibits.get(itemPosition).getExchangeCost());
-                int totalAmount = quibits.get(itemPosition).getTotalQuibits();
-                totalAmount += amount;
-                String quibitKey = quibitsKey.get(itemPosition);
-                DatabaseReference updateRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges").child(quibitKey).child("totalQuibits");
-                updateRef.setValue(totalAmount);
-                break;
-        }
+
+            switch (view.getId()) {
+                case R.id.saveMoneyQuibitButton:
+                   updateQuibit(quibits, quibitsKey, itemPosition);
+                    break;
+             }
             }
             @Override
             public void onCancelled(DatabaseError databaseError){
@@ -78,6 +77,18 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
         });
 
     }
+
+   public void updateQuibit(ArrayList<Quibit> quibits , ArrayList<String> quibitsKey , Integer itemPosition){
+        mAuth = FirebaseAuth.getInstance();
+        Float amount = parseFloat(quibits.get(itemPosition).getExchangeCost());
+        int totalAmount = quibits.get(itemPosition).getTotalQuibits();
+        totalAmount += amount;
+        String quibitKey = quibitsKey.get(itemPosition);
+        DatabaseReference updateRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges").child(quibitKey).child("totalQuibits");
+        updateRef.setValue(totalAmount);
+    }
+
+
 
 
 
