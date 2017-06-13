@@ -65,11 +65,11 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
 
                 int itemPosition = getLayoutPosition();
 
-            switch (view.getId()) {
-                case R.id.saveMoneyQuibitButton:
-                   updateQuibit(quibits, quibitsKey, itemPosition);
-                    break;
-             }
+                switch (view.getId()) {
+                    case R.id.saveMoneyQuibitButton:
+                       updateQuibit(quibits, quibitsKey, itemPosition);
+                        break;
+                 }
             }
             @Override
             public void onCancelled(DatabaseError databaseError){

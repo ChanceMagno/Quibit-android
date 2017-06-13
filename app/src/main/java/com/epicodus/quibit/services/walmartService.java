@@ -19,17 +19,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class walmartService {
-    public Item holdItem;
-
-    public void holdOntoGoal(Item selectedItem){
-        Log.i("HoldItem", selectedItem.getName());
-        holdItem = selectedItem;
-        Log.i("HoldItem", holdItem.getName());
-    }
-
-    public Item getHoldItem() {
-        return holdItem;
-    }
 
     public static void searchItems(String item, Callback callback) {
         OkHttpClient client = new OkHttpClient.Builder().build();
