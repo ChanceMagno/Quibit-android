@@ -43,12 +43,11 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
 
     public void bindQuibit(Quibit quibit){
         TextView quibitItemTextView = (TextView) mView.findViewById(R.id.quibitTextView);
-        quibitItemTextView.setText(quibit.getExchangeItem());
+        quibitItemTextView.setText(String.format("Skip %s Today!", quibit.getExchangeItem()));
     }
 
     @Override
     public void onClick(final View view){
-
         final ArrayList<Quibit> quibits = new ArrayList<>();
         final ArrayList<String> quibitsKey = new ArrayList<>();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges");
