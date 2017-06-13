@@ -57,6 +57,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     String mSavedPreferenceValue; Integer savedAmount = 0;
     String mSavedAmountPreferenceValue;
     Integer percentageRounded = 0;
+    String progressMessage;
 
 
 
@@ -69,7 +70,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         mEditor = mSharedPreferences.edit();
         mSavedPreferenceValue = mSharedPreferences.getString(Constants.PREFERENCES_GOALVALUE_KEY, "goalValue");
 
-         mSharedPreferenceSavedAmount = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mSharedPreferenceSavedAmount = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mSavedAmountEditor =  mSharedPreferenceSavedAmount.edit();
         mSavedAmountPreferenceValue =  mSharedPreferenceSavedAmount.getString(Constants.PREFERENCES_SAVEDAMOUNT_KEY, "0");
 
@@ -77,8 +78,8 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         addQuibitActionButton.setOnClickListener(this);
         FloatingActionButton setGoalActionButton = (FloatingActionButton) view.findViewById(R.id.setGoalfloatingActionButton);
         setGoalActionButton.setOnClickListener(this);
+
         createPieChart(view);
-        mAuth = FirebaseAuth.getInstance();
         setGoalValue();
         getQuibitInfo();
         return view;
@@ -99,7 +100,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     }
 
     public void calculatePercentage(Integer savedAmount){
-        Double percentage = 0.000;
+        Double percentage;
         if (goalValue == 0){
             savedAmount = 0;
         } else if(goalValue < savedAmount) {
@@ -108,15 +109,26 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         mSavedAmountEditor.putString(Constants.PREFERENCES_SAVEDAMOUNT_KEY, savedAmount.toString()).apply();
         percentage = (double) savedAmount / goalValue * 100;
         percentageRounded = Math.round(percentage.intValue());
+        setProgressMessage(percentageRounded);
         createPieChart(getView());
+    }
 
-        Log.i("percentage", percentage.toString());
-        Log.i("percentageRounded", percentageRounded.toString());
-        Log.i("GOALamount", goalValue.toString());
-        Log.i("SAVEDAmount", savedAmount.toString());
+    public void setProgressMessage(Integer percentageRounded){
+        if(percentageRounded == 0){
+            progressMessage = "Start your Quibits!";
+        } else if(percentageRounded < 30){
+            progressMessage = "One step at a time..";
+        } else if (percentageRounded < 60 && percentageRounded > 50) {
+            progressMessage = "Over the hill!";
+        } else if(percentageRounded > 80 && percentageRounded < 100) {
+            progressMessage = "Almost there keep going!";
+        } else if (percentageRounded == 100){
+            progressMessage = "YOU HIT YOUR GOAL!";
+        }
     }
 
     public void createPieChart(View view){
+
         pieChart = (PieChart)view.findViewById(R.id.chart1);
         PieEntryLabels = new ArrayList<String>();
         addValuesToPIEENTRY();
@@ -128,7 +140,9 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         pieData.setValueTextSize(14);
         Typeface pacifico = Typeface.createFromAsset(getActivity().getAssets(), "fonts/peralta.ttf");
         pieDataSet.setValueTypeface(pacifico);
-        pieChart.setDescription("Your Quibit Progress");
+        pieChart.setDescription(progressMessage);
+        pieChart.setDescriptionTextSize(12);
+        pieChart.setUsePercentValues(true);
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleColor(ColorTemplate.COLOR_SKIP);
         pieDataSet.setColors(new int[] { R.color.colorPrimary, R.color.positiveColor }, getActivity());
@@ -147,9 +161,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     }
 
     public void getQuibitInfo() {
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
             mQuibitsReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges");
             mQuibitsReference.addValueEventListener(mListener = new ValueEventListener() {
             @Override
@@ -167,7 +179,6 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.i("here", "here");
             }
         });
     }

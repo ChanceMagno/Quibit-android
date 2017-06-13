@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.fragments.ProgressFragment;
+import com.epicodus.quibit.fragments.QuibitsFragment;
 import com.epicodus.quibit.models.Quibit;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,12 +44,11 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
 
     public void bindQuibit(Quibit quibit){
         TextView quibitItemTextView = (TextView) mView.findViewById(R.id.quibitTextView);
-        quibitItemTextView.setText(quibit.getExchangeItem());
+        quibitItemTextView.setText(String.format("Skip %s Today!", quibit.getExchangeItem()));
     }
 
     @Override
     public void onClick(final View view){
-
         final ArrayList<Quibit> quibits = new ArrayList<>();
         final ArrayList<String> quibitsKey = new ArrayList<>();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges");
@@ -72,12 +72,9 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
                 break;
         }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError){
-
             }
-
         });
 
     }
