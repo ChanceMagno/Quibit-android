@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.firebase.ui.database.FirebaseListAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,4 +36,5 @@ public class SectionsPageAdapter extends FragmentPagerAdapter{
     public int getCount() {
         return mFragmentList.size();
     }
+    
 }
