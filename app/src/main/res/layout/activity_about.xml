@@ -22,16 +22,14 @@
         android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="438dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text='Quibits is a money/goal oreiented helper! This application will help you visualize what skipping that "cup of coffee" can instead be put towards. Once setting a goal, you can see a live progress bar, estimations on when you can get that brand new thing!'
+        android:text='Quibits is a money/goal oriented helper! This application will help you visualize what skipping that "cup of coffee" can really do! First set a goal of what you want to save towards, then add a Quibit(what you are willing to give up) and then watch as your daily Quibits add up towards your dream goal!'
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.578" />
+        app:layout_constraintVertical_bias="0.571"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" />
 </android.support.constraint.ConstraintLayout>
