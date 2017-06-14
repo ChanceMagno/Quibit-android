@@ -106,8 +106,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Bundle args = new Bundle();
 
         switch (id){
-            case R.id.nav_1:fragmentClass =ProgressFragment.class;args.putString(Constants.FRAG_A,"Import");break;
-            case R.id.nav_2:fragmentClass =QuibitsFragment.class;args.putString(Constants.FRAG_A,"Gallery");break;
+            case R.id.nav_1:fragmentClass =ProgressFragment.class;args.putString(Constants.FRAG_A,"Progress");break;
+            case R.id.nav_2:fragmentClass =QuibitsFragment.class;args.putString(Constants.FRAG_A,"Quibits");break;
             case R.id.nav_3:fragmentClass =FragmentA.class;args.putString(Constants.FRAG_A,"Slideshow");break;
             case R.id.nav_4:fragmentClass =FragmentA.class;args.putString(Constants.FRAG_A,"Tools");break;
             case R.id.nav_5:fragmentClass =FragmentC.class;args.putString(Constants.FRAG_C,"Share");break;
