@@ -2,24 +2,19 @@ package com.epicodus.quibit.fragments;
 
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.adapters.FirebaseQuibitsViewHolder;
 import com.epicodus.quibit.models.Quibit;
-import com.epicodus.quibit.ui.CreateQuibitActivity;
-import com.epicodus.quibit.ui.MainActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

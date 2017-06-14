@@ -10,5 +10,8 @@ public class Constants {
     public static final String WALMART_NUMBER_PARAMETER = "numItems";
     public static final String PREFERENCES_GOALVALUE_KEY = "goalValue";
     public static final String PREFERENCES_SAVEDAMOUNT_KEY = "0";
+    public final static String FRAG_A="fragment_a";
+    public final static String FRAG_B="fragment_b";
+    public final static String FRAG_C="fragment_c";
 }
 

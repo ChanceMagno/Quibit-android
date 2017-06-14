@@ -7,10 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
 import com.epicodus.quibit.R;
-import com.epicodus.quibit.adapters.SectionsPageAdapter;
+import com.epicodus.quibit.adapters.SectionsPagerAdapter;
 import com.epicodus.quibit.fragments.tab1Fragment;
 import com.epicodus.quibit.fragments.ProgressFragment;
 import com.epicodus.quibit.fragments.QuibitsFragment;
@@ -21,7 +20,7 @@ import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity {
     public static final String TAG = "TAB1Fragment";
-    private SectionsPageAdapter mSectionsPageAdapter;
+    private SectionsPagerAdapter mSectionsPageAdapter;
     private ViewPager mViewPager;
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -49,22 +48,22 @@ public class HomeActivity extends AppCompatActivity {
                 }
             };
 
-            mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
-
-            mViewPager = (ViewPager) findViewById(R.id.container);
-            setupViewPager(mViewPager);
+//            mSectionsPageAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+//
+//            mViewPager = (ViewPager) findViewById(R.id.container);
+//            setupViewPager(mViewPager);
 
             TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
             tabLayout.setupWithViewPager(mViewPager);
         }
 
-    private void setupViewPager(ViewPager viewPager) {
-        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ProgressFragment(), "Progress");
-        adapter.addFragment(new QuibitsFragment(), "Quibits");
-        adapter.addFragment(new tab1Fragment(), "About Us");
-        viewPager.setAdapter(adapter);
-    }
+//    private void setupViewPager(ViewPager viewPager) {
+//        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
+//        adapter.addFragment(new ProgressFragment(), "Progress");
+//        adapter.addFragment(new QuibitsFragment(), "Quibits");
+//        adapter.addFragment(new tab1Fragment(), "About Us");
+//        viewPager.setAdapter(adapter);
+//    }
 
     @Override
     public void onStart(){

@@ -16,12 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.SearchGoalsFormActivity"
             android:theme="@style/NoActionBarTheme" />
         <activity android:name=".ui.SearchGoalsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.epicodus.quibit.ui.MainActivity" />
+                android:value="com.epicodus.quibit.ui.SearchGoalsFormActivity" />
         </activity>
         <activity android:name=".ui.CreateQuibitActivity">
             <meta-data
@@ -36,7 +36,7 @@
         <activity android:name=".ui.AboutActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.epicodus.quibit.ui.MainActivity" />
+                android:value="com.epicodus.quibit.ui.SearchGoalsFormActivity" />
         </activity>
         <activity
             android:name=".ui.LoginActivity"
@@ -54,6 +54,10 @@
             android:name=".ui.HomeActivity"
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

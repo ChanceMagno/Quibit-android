@@ -9,17 +9,15 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.models.Quibit;
 import com.epicodus.quibit.ui.CreateQuibitActivity;
-import com.epicodus.quibit.ui.MainActivity;
+import com.epicodus.quibit.ui.SearchGoalsFormActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
@@ -87,7 +85,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.setGoalfloatingActionButton:
-                Intent intent = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), SearchGoalsFormActivity.class);
                 startActivity(intent);
                 break;
             case R.id.addQuibitfloatingActionButton:
