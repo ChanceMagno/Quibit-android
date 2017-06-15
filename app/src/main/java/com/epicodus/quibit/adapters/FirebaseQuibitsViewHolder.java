@@ -2,18 +2,13 @@ package com.epicodus.quibit.adapters;
 
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.LongSparseArray;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.epicodus.quibit.R;
-import com.epicodus.quibit.fragments.ProgressFragment;
-import com.epicodus.quibit.fragments.QuibitsFragment;
 import com.epicodus.quibit.models.Quibit;
-import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,14 +16,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-
 import java.util.ArrayList;
-
 import static java.lang.Float.parseFloat;
 
-public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
+public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     View mView;
     Context mContext;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -45,11 +36,11 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
     public void bindQuibit(Quibit quibit){
         TextView quibitItemTextView = (TextView) mView.findViewById(R.id.quibitTextView);
         quibitItemTextView.setText(String.format("Skip %s Today!", quibit.getExchangeItem()));
+
     }
 
     @Override
     public void onClick(final View view){
-
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -70,11 +61,14 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
                        updateQuibit(quibits, quibitsKey, itemPosition);
                         break;
                  }
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError){
             }
         });
+
+
 
     }
 
@@ -87,16 +81,5 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
         DatabaseReference updateRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges").child(quibitKey).child("totalQuibits");
         updateRef.setValue(totalAmount);
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }

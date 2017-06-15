@@ -61,7 +61,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         @Bind(R.id.itemNameTextView) TextView mItemNameTextView;
         @Bind(R.id.itemImageView) ImageView mImageView;
         @Bind(R.id.itemDescriptionTextView) TextView mDescriptionTextView;
-        @Bind(R.id.ratingBar) RatingBar mRatingBar;
+
         @Bind(R.id.msrpPriceTextView) TextView mMSRP;
         @Bind(R.id.salePriceTextView) TextView mPrice;
         @Bind(R.id.ViewItemButton) FloatingActionButton mActionButton;
@@ -73,7 +73,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
             mActionButton.setOnClickListener(this);
-        }
+    }
 
 
 
@@ -90,7 +90,6 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
                 mMSRP.setText(String.format("$%s", item.getMsrp()));
             }
             mPrice.setText(String.format("$%s", item.getSalePrice()));
-            mRatingBar.setRating(parseFloat(item.getRating()) / 2);
             Picasso.with(itemView.getContext()).load(item.getLargeImage()).resize(MAX_WIDTH, MAX_HEIGHT).centerCrop().into(mImageView);
         }
 
