@@ -18,14 +18,17 @@ import android.widget.TextView;
 import com.epicodus.quibit.ui.ItemDetailActivity;
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.models.Item;
+import com.epicodus.quibit.util.ItemTouchHelperAdapter;
 import com.squareup.picasso.Picasso;
 import org.parceler.Parcels;
 import java.util.ArrayList;
+import java.util.Collections;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import static java.lang.Float.parseFloat;
 
-public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemViewHolder>{
+public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemViewHolder> implements ItemTouchHelperAdapter{
     private ArrayList<Item> mItems = new ArrayList<>();
     private Context mContext;
     private static final int MAX_WIDTH = 300;
@@ -55,6 +58,27 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
     @Override
     public int getItemCount() {
         return mItems.size();
+    }
+
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        if(fromPosition < toPosition){
+            for (int i = fromPosition; i < toPosition; i++){
+                Collections.swap(mItems, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--){
+                Collections.swap(mItems, i, i -1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
+        return true;
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        mItems.remove(position);
+        notifyItemRemoved(position);
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

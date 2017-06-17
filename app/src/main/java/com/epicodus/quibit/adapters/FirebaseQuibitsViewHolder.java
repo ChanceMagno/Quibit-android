@@ -2,6 +2,7 @@ package com.epicodus.quibit.adapters;
 
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.LongSparseArray;
@@ -13,6 +14,7 @@ import com.epicodus.quibit.R;
 import com.epicodus.quibit.fragments.ProgressFragment;
 import com.epicodus.quibit.fragments.QuibitsFragment;
 import com.epicodus.quibit.models.Quibit;
+import com.epicodus.quibit.util.ItemTouchHelperAdapter;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,12 +29,13 @@ import java.util.ArrayList;
 
 import static java.lang.Float.parseFloat;
 
-public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ItemTouchHelperAdapter{
 
     View mView;
     Context mContext;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseAuth mAuth;
+    public CardView mCardView;
 
     public FirebaseQuibitsViewHolder(View itemView){
         super(itemView);
@@ -45,6 +48,7 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
     public void bindQuibit(Quibit quibit){
         TextView quibitItemTextView = (TextView) mView.findViewById(R.id.quibitTextView);
         quibitItemTextView.setText(String.format("Skip %s Today!", quibit.getExchangeItem()));
+        CardView mCardView = (CardView) mView.findViewById(R.id.cardView);
     }
 
     @Override
@@ -89,14 +93,13 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
     }
 
 
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        return false;
+    }
 
+    @Override
+    public void onItemDismiss(int position) {
 
-
-
-
-
-
-
-
-
+    }
 }
