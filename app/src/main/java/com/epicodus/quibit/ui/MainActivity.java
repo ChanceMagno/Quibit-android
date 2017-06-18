@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.logout:
-//                logout();
+                logout();
                 Intent intentNav = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(intentNav);
                 break;

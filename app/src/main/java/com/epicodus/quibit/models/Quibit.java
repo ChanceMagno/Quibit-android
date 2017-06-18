@@ -11,6 +11,7 @@ public class Quibit {
     String exchangeOccurenceRate;
     String quibitCreationDate;
     int totalQuibits;
+    String index;
 
     Quibit(){}
 
@@ -20,6 +21,7 @@ public class Quibit {
         this.exchangeOccurenceRate = exchangeOccurenceRate;
         this.quibitCreationDate =  DateFormat.getDateTimeInstance().format(new Date());
         this.totalQuibits = 0;
+        this.index = "not_specified";
 
     }
 
@@ -41,5 +43,13 @@ public class Quibit {
     }
 
     public int getTotalQuibits() {return totalQuibits; }
+
+    public String getIndex(String index){
+        return index;
+    }
+
+    public void setIndex(String index){
+        this.index = index;
+    }
 }
 
