@@ -1,11 +1,16 @@
 package com.epicodus.quibit.adapters;
 
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.models.Quibit;
@@ -23,8 +28,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import static java.lang.Float.parseFloat;
+import static java.security.AccessController.getContext;
 
-public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ItemTouchHelperViewHolder {
+public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ItemTouchHelperViewHolder{
 
     View mView;
     Context mContext;

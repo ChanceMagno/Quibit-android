@@ -1,15 +1,10 @@
 package com.epicodus.quibit.adapters;
 
 import android.content.Context;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v7.widget.CardView;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.TextView;
+import android.content.Intent;
 
-import com.epicodus.quibit.R;
-import com.epicodus.quibit.fragments.QuibitsFragment;
 import com.epicodus.quibit.models.Quibit;
+import com.epicodus.quibit.ui.AboutActivity;
 import com.epicodus.quibit.util.ItemTouchHelperAdapter;
 import com.epicodus.quibit.util.OnStartDragListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
