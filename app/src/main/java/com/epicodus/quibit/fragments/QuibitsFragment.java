@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.adapters.FirebaseQuibitsListAdapter;
 import com.epicodus.quibit.adapters.FirebaseQuibitsViewHolder;
+import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.models.Quibit;
 import com.epicodus.quibit.ui.CreateQuibitActivity;
 import com.epicodus.quibit.ui.LoginActivity;
@@ -38,10 +39,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
 import static com.epicodus.quibit.R.id.recyclerView;
 
 
-public class QuibitsFragment extends Fragment implements OnStartDragListener{
+public class QuibitsFragment extends Fragment implements OnStartDragListener, View.OnClickListener {
     public static final String TAG = "Quibitsfragment";
     private DatabaseReference mQuibitsReference;
     private FirebaseRecyclerAdapter mFirebaseAdapter;
@@ -79,9 +82,16 @@ public class QuibitsFragment extends Fragment implements OnStartDragListener{
     }
 
     private void setUpFireBaseAdapter(View view){
-        mFirebaseAdapter = new FirebaseQuibitsListAdapter(Quibit.class,
-                R.layout.quibit_fragment, FirebaseQuibitsViewHolder.class, mQuibitsReference, this, getContext());
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+
+
+        Query query = FirebaseDatabase.getInstance()
+                .getReference("users").child(user.getUid()).child("exchanges")
+                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
+
+        mFirebaseAdapter = new FirebaseQuibitsListAdapter(Quibit.class,
+                R.layout.quibit_fragment, FirebaseQuibitsViewHolder.class, query, this, getContext());
 
         RecyclerView mRecyclerView = (RecyclerView) view.findViewById(recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -102,5 +112,10 @@ public class QuibitsFragment extends Fragment implements OnStartDragListener{
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
         mItemTouchHelper.startDrag(viewHolder);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

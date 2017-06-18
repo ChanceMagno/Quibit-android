@@ -4,24 +4,19 @@ import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.LongSparseArray;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.epicodus.quibit.R;
-import com.epicodus.quibit.fragments.ProgressFragment;
-import com.epicodus.quibit.fragments.QuibitsFragment;
+import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.models.Quibit;
-import com.epicodus.quibit.util.ItemTouchHelperAdapter;
-import com.firebase.ui.database.FirebaseListAdapter;
+import com.epicodus.quibit.util.ItemTouchHelperViewHolder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -29,7 +24,7 @@ import java.util.ArrayList;
 
 import static java.lang.Float.parseFloat;
 
-public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ItemTouchHelperAdapter{
+public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ItemTouchHelperViewHolder {
 
     View mView;
     Context mContext;
@@ -43,6 +38,7 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
         mContext = itemView.getContext();
         FloatingActionButton mSaveMoneyQuibitButton = (FloatingActionButton) itemView.findViewById(R.id.saveMoneyQuibitButton);
         mSaveMoneyQuibitButton.setOnClickListener(this);
+        CardView mCardView = (CardView) mView.findViewById(R.id.cardView);
     }
 
     public void bindQuibit(Quibit quibit){
@@ -54,7 +50,7 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
     @Override
     public void onClick(final View view){
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges");
+        Query ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges").orderByChild(Constants.FIREBASE_QUERY_INDEX);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -93,13 +89,22 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
     }
 
 
+
     @Override
-    public boolean onItemMove(int fromPosition, int toPosition) {
-        return false;
+    public void onItemSelected() {
+        itemView.animate()
+                .alpha(0.7f)
+                .scaleX(0.9f)
+                .scaleY(0.9f)
+                .setDuration(500);
+
     }
 
     @Override
-    public void onItemDismiss(int position) {
-
+    public void onItemClear() {
+        itemView.animate()
+                .alpha(1f)
+                .scaleX(1f)
+                .scaleY(1f);
     }
 }
