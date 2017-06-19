@@ -10,15 +10,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.constants.Constants;
-import com.epicodus.quibit.models.Quibit;
 import com.epicodus.quibit.ui.CreateQuibitActivity;
 import com.epicodus.quibit.ui.LoginActivity;
 import com.epicodus.quibit.ui.MainActivity;
@@ -44,7 +40,6 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     private SharedPreferences mSharedPreferences;
     private SharedPreferences mSharedPreferenceSavedAmount;
     private SharedPreferences.Editor mSavedAmountEditor;
-    public static final String TAG = "Progressfragment";
     private DatabaseReference mQuibitsReference;
     private ValueEventListener mListener;
     PieChart pieChart;
@@ -180,19 +175,12 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
 
     public void getQuibitInfo() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            mQuibitsReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges");
+            mQuibitsReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("total");
             mQuibitsReference.addValueEventListener(mListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Integer savedAmount = 0;
-                final ArrayList<Quibit> quibits = new ArrayList<>();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    quibits.add(snapshot.getValue(Quibit.class));
-                }
-                for (int i = 0; i < quibits.size(); i++) {
-                    Integer amount = Math.round(quibits.get(i).getTotalQuibits());
-                    savedAmount += amount;
-                }
+                savedAmount = Math.round(parseFloat(String.valueOf(dataSnapshot.getValue())));
                 calculatePercentage(savedAmount);
             }
             @Override

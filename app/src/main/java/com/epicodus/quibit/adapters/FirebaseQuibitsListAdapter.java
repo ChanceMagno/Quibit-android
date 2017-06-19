@@ -1,10 +1,9 @@
 package com.epicodus.quibit.adapters;
 
 import android.content.Context;
-import android.content.Intent;
+import android.widget.Toast;
 
 import com.epicodus.quibit.models.Quibit;
-import com.epicodus.quibit.ui.AboutActivity;
 import com.epicodus.quibit.util.ItemTouchHelperAdapter;
 import com.epicodus.quibit.util.OnStartDragListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -13,7 +12,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -52,7 +50,6 @@ public class FirebaseQuibitsListAdapter extends FirebaseRecyclerAdapter<Quibit, 
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
@@ -65,6 +62,7 @@ public class FirebaseQuibitsListAdapter extends FirebaseRecyclerAdapter<Quibit, 
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
+        Toast.makeText(mContext, "Your Quibit has been moved", Toast.LENGTH_LONG).show();
         Collections.swap(mQuibits, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
         setIndexInFirebase();
@@ -73,6 +71,7 @@ public class FirebaseQuibitsListAdapter extends FirebaseRecyclerAdapter<Quibit, 
 
     @Override
     public void onItemDismiss(int position) {
+        Toast.makeText(mContext, mQuibits.get(position).getExchangeItem() + " Quibit removed", Toast.LENGTH_LONG).show();
         mQuibits.remove(position);
         getRef(position).removeValue();
     }
