@@ -5,6 +5,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import static java.lang.Float.parseFloat;
+import static java.lang.Float.valueOf;
 import static java.security.AccessController.getContext;
 
 public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ItemTouchHelperViewHolder{
@@ -37,6 +39,8 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseAuth mAuth;
     public CardView mCardView;
+    Float totalDatabaseAmount;
+    Float amount;
 
     public FirebaseQuibitsViewHolder(View itemView){
         super(itemView);
@@ -74,6 +78,7 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
                 switch (view.getId()) {
                     case R.id.saveMoneyQuibitButton:
                        updateQuibit(quibits, quibitsKey, itemPosition);
+                        updateTotal();
                         break;
                  }
             }
@@ -86,12 +91,27 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
 
    public void updateQuibit(ArrayList<Quibit> quibits , ArrayList<String> quibitsKey , Integer itemPosition){
         mAuth = FirebaseAuth.getInstance();
-        Float amount = parseFloat(quibits.get(itemPosition).getExchangeCost());
+        amount = parseFloat(quibits.get(itemPosition).getExchangeCost());
         int totalAmount = quibits.get(itemPosition).getTotalQuibits();
         totalAmount += amount;
         String quibitKey = quibitsKey.get(itemPosition);
-        DatabaseReference updateRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges").child(quibitKey).child("totalQuibits");
-        updateRef.setValue(totalAmount);
+        DatabaseReference updateExchangesRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges").child(quibitKey).child("totalQuibits");
+        updateExchangesRef.setValue(totalAmount);
+    }
+
+    public void updateTotal() {
+        final DatabaseReference updateTotalRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("total");
+        updateTotalRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+               totalDatabaseAmount = parseFloat(String.valueOf(dataSnapshot.getValue()));
+                updateTotalRef.setValue(totalDatabaseAmount + amount);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
