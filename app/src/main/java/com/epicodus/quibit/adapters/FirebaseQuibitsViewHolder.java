@@ -104,8 +104,10 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
         updateTotalRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-               totalDatabaseAmount = parseFloat(String.valueOf(dataSnapshot.getValue()));
-                updateTotalRef.setValue(totalDatabaseAmount + amount);
+                if(dataSnapshot.getValue() != null){
+                    totalDatabaseAmount = parseFloat(String.valueOf(dataSnapshot.getValue()));
+                    updateTotalRef.setValue(totalDatabaseAmount + amount);
+                } else {updateTotalRef.setValue(amount);}
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

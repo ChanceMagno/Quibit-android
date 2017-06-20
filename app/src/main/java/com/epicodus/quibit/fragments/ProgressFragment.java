@@ -180,7 +180,10 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Integer savedAmount = 0;
-                savedAmount = Math.round(parseFloat(String.valueOf(dataSnapshot.getValue())));
+                if(dataSnapshot.getValue() != null) {
+                    savedAmount = Math.round(parseFloat(String.valueOf(dataSnapshot.getValue())));
+                }
+
                 calculatePercentage(savedAmount);
             }
             @Override
