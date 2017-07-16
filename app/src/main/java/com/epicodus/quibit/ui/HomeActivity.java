@@ -7,11 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.adapters.SectionsPageAdapter;
-import com.epicodus.quibit.fragments.tab1Fragment;
+import com.epicodus.quibit.fragments.AboutFragment;
 import com.epicodus.quibit.fragments.ProgressFragment;
 import com.epicodus.quibit.fragments.QuibitsFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new ProgressFragment(), "Progress");
         adapter.addFragment(new QuibitsFragment(), "Quibits");
-        adapter.addFragment(new tab1Fragment(), "About Us");
+        adapter.addFragment(new AboutFragment(), "About Us");
         viewPager.setAdapter(adapter);
     }
 

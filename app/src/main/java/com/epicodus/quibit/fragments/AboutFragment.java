@@ -27,7 +27,7 @@ import static com.epicodus.quibit.R.layout.activity_about;
 import static com.epicodus.quibit.R.layout.tab1_fragment;
 
 
-public class tab1Fragment extends Fragment {
+public class AboutFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
     public static final String TAG = "tab1fragment";
