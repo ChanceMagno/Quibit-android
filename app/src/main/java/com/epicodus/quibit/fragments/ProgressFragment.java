@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.ui.CreateQuibitActivity;
@@ -37,9 +40,7 @@ import static java.lang.Float.parseFloat;
 
 
 public class ProgressFragment extends Fragment implements View.OnClickListener {
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences mSharedPreferenceSavedAmount;
-    private SharedPreferences.Editor mSavedAmountEditor;
+
     private DatabaseReference mQuibitsReference;
     private ValueEventListener mListener;
     PieChart pieChart;
@@ -48,12 +49,11 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     PieDataSet pieDataSet;
     PieData pieData;
     Integer goalValue = 0;
-    String mSavedPreferenceValue;
-    String mSavedAmountPreferenceValue;
     Integer percentageRounded = 0;
     String progressMessage;
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseUser user;
 
 
 
@@ -63,10 +63,11 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         final View view = inflater.inflate(R.layout.progress_fragment, container, false);
 
         mAuth = FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
-                FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user == null){
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -75,12 +76,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
             }
         };
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mSavedPreferenceValue = mSharedPreferences.getString(Constants.PREFERENCES_GOALVALUE_KEY, "goalValue");
 
-        mSharedPreferenceSavedAmount = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mSavedAmountEditor =  mSharedPreferenceSavedAmount.edit();
-        mSavedAmountPreferenceValue =  mSharedPreferenceSavedAmount.getString(Constants.PREFERENCES_SAVEDAMOUNT_KEY, "0");
 
         FloatingActionButton addQuibitActionButton = (FloatingActionButton) view.findViewById(R.id.addQuibitfloatingActionButton);
         addQuibitActionButton.setOnClickListener(this);
@@ -116,7 +112,6 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         } else if(goalValue < savedAmount) {
             savedAmount = goalValue;
         }
-        mSavedAmountEditor.putString(Constants.PREFERENCES_SAVEDAMOUNT_KEY, savedAmount.toString()).apply();
 
         percentage = (double) savedAmount / goalValue * 100;
 
@@ -174,7 +169,6 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     }
 
     public void getQuibitInfo() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             mQuibitsReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("total");
             mQuibitsReference.addValueEventListener(mListener = new ValueEventListener() {
             @Override
@@ -183,7 +177,6 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
                 if(dataSnapshot.getValue() != null) {
                     savedAmount = Math.round(parseFloat(String.valueOf(dataSnapshot.getValue())));
                 }
-
                 calculatePercentage(savedAmount);
             }
             @Override
@@ -193,10 +186,23 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     }
 
     public void setGoalValue(){
-        if (mSavedPreferenceValue != "goalValue"){
-            goalValue = Math.round(parseFloat(mSavedPreferenceValue));
-        } else { goalValue = 0;
-        }
+        DatabaseReference goalRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("goal").child("salePrice");
+        goalRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    goalValue = Math.round(parseFloat(dataSnapshot.getValue(String.class)));
+                } else{
+                    goalValue = 0;
+                    Toast.makeText(getActivity(), "No Goal has been set", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
