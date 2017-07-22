@@ -207,7 +207,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
 
     public void generateGoalCompletionPopup(){
         layoutInflater = (LayoutInflater) mView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.activity_about, null);
+        ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.goal_reached_fragment, null);
         popupWindow = new PopupWindow(container, mDisplayWidth, mDisplayHeight, true);
         popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, (mTrueDisplayWidth-mDisplayWidth)/2, 500);
     }
