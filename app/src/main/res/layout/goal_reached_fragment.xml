@@ -7,5 +7,10 @@
     >
 
 
-
+    <TextView
+        android:id="@+id/testtext"
+        android:layout_width="361dp"
+        android:layout_height="101dp"
+        android:text="TextView"
+        android:textSize="30sp" />
 </FrameLayout>

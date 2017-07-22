@@ -16,10 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.constants.Constants;
+import com.epicodus.quibit.services.PopulatePopUp;
 import com.epicodus.quibit.ui.CreateQuibitActivity;
 import com.epicodus.quibit.ui.LoginActivity;
 import com.epicodus.quibit.ui.MainActivity;
@@ -209,6 +211,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.goal_reached_fragment, null);
         popupWindow = new PopupWindow(container, mDisplayWidth, mDisplayHeight, true);
         popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, (mTrueDisplayWidth-mDisplayWidth)/2, (mTrueDisplayHeight - mDisplayHeight)/2);
+        PopulatePopUp.setGoalCompletionPopUp(popupWindow);
 
     }
 
