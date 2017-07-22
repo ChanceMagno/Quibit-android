@@ -50,21 +50,21 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     private View mView;
     private DatabaseReference mQuibitsReference;
     private ValueEventListener mListener;
-    PieChart pieChart;
-    ArrayList<Entry> entries;
-    ArrayList<String> PieEntryLabels;
-    PieDataSet pieDataSet;
-    PieData pieData;
-    Integer goalValue = 0;
-    Integer percentageRounded = 0;
-    String progressMessage;
-    FirebaseAuth mAuth;
-    FirebaseAuth.AuthStateListener mAuthListener;
-    FirebaseUser user;
-    int mDisplayWidth;
-    int mDisplayHeight;
-    int mTrueDisplayWidth;
-    int getmTrueDisplayHeight;
+    private PieChart pieChart;
+    private ArrayList<Entry> entries;
+    private ArrayList<String> PieEntryLabels;
+    private PieDataSet pieDataSet;
+    private PieData pieData;
+    private Integer goalValue = 0;
+    private  Integer percentageRounded = 0;
+    private String progressMessage;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseUser user;
+    private int mDisplayWidth;
+    private int mDisplayHeight;
+    private int mTrueDisplayWidth;
+    private int mTrueDisplayHeight;
 
 
 
@@ -78,7 +78,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
         test = (ConstraintLayout) mView.findViewById(R.id.test);
         mTrueDisplayWidth = (int) mMetrics.widthPixels;
-        getmTrueDisplayHeight = (int) mMetrics.heightPixels;
+        mTrueDisplayHeight = (int) mMetrics.heightPixels;
         mDisplayHeight = (int) (mMetrics.heightPixels * .8);
         mDisplayWidth = (int) (mMetrics.widthPixels * .8);
 
@@ -208,7 +208,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         layoutInflater = (LayoutInflater) mView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.goal_reached_fragment, null);
         popupWindow = new PopupWindow(container, mDisplayWidth, mDisplayHeight, true);
-        popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, (mTrueDisplayWidth-mDisplayWidth)/2, (getmTrueDisplayHeight - mDisplayHeight)/2);
+        popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, (mTrueDisplayWidth-mDisplayWidth)/2, (mTrueDisplayHeight - mDisplayHeight)/2);
 
     }
 

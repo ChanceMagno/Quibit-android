@@ -17,5 +17,6 @@ public class Constants {
     public static final String FIREBASE_QUERY_USERS = "users";
     public static final String FIREABASE_QUERY_GOAL = "goal";
     public static final String FIREABASE_QUERY_SALE_PRICE = "salePrice";
+    public static final String FIREBASE_QUERY_EXCHANGES = "exchanges";
 }
 

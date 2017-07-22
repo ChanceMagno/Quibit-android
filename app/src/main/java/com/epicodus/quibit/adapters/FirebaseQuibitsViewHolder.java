@@ -61,7 +61,7 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
     @Override
     public void onClick(final View view){
 
-        Query ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("exchanges").orderByChild(Constants.FIREBASE_QUERY_INDEX);
+        Query ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_QUERY_USERS).child(user.getUid()).child(Constants.FIREBASE_QUERY_EXCHANGES).orderByChild(Constants.FIREBASE_QUERY_INDEX);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
