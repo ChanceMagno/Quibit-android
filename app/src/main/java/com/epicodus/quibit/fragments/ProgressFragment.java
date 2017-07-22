@@ -68,6 +68,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     int mDisplayWidth;
     int mDisplayHeight;
     int mTrueDisplayWidth;
+    int getmTrueDisplayHeight;
 
 
 
@@ -81,6 +82,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
         test = (ConstraintLayout) mView.findViewById(R.id.test);
         mTrueDisplayWidth = (int) mMetrics.widthPixels;
+        getmTrueDisplayHeight = (int) mMetrics.heightPixels;
         mDisplayHeight = (int) (mMetrics.heightPixels * .8);
         mDisplayWidth = (int) (mMetrics.widthPixels * .8);
 
@@ -209,11 +211,11 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         layoutInflater = (LayoutInflater) mView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.goal_reached_fragment, null);
         popupWindow = new PopupWindow(container, mDisplayWidth, mDisplayHeight, true);
-        popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, (mTrueDisplayWidth-mDisplayWidth)/2, 500);
+        popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, (mTrueDisplayWidth-mDisplayWidth)/2, (getmTrueDisplayHeight - mDisplayHeight)/2);
     }
 
     public void setGoalValue(){
-        DatabaseReference goalRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("goal").child("salePrice");
+        DatabaseReference goalRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_QUERY_USERS).child(user.getUid()).child(Constants.FIREABASE_QUERY_GOAL).child(Constants.FIREABASE_QUERY_SALE_PRICE);
         goalRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
