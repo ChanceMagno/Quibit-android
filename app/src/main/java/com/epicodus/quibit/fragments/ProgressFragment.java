@@ -67,6 +67,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     FirebaseUser user;
     int mDisplayWidth;
     int mDisplayHeight;
+    int mTrueDisplayWidth;
 
 
 
@@ -79,6 +80,8 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         mMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
         test = (ConstraintLayout) mView.findViewById(R.id.test);
+        mTrueDisplayWidth = (int) mMetrics.widthPixels;
+
         mDisplayHeight = (int) (mMetrics.heightPixels * .8);
         mDisplayWidth = (int) (mMetrics.widthPixels * .8);
 
@@ -120,7 +123,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.activity_about, null);
                 popupWindow = new PopupWindow(container, mDisplayWidth, mDisplayHeight, true);
 
-                popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, 200, 800);
+                popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, (mTrueDisplayWidth-mDisplayWidth)/2, 500);
 
 //                Intent intent1 = new Intent(getActivity(), CreateQuibitActivity.class);
 //                startActivity(intent1);
