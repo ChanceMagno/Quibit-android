@@ -9,11 +9,17 @@ import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.epicodus.quibit.R;
@@ -36,11 +42,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static java.lang.Float.parseFloat;
 
 
 public class ProgressFragment extends Fragment implements View.OnClickListener {
-
+    private DisplayMetrics mMetrics;
+    private PopupWindow popupWindow;
+    private LayoutInflater layoutInflater;
+    private ConstraintLayout test;
+    private View mView;
     private DatabaseReference mQuibitsReference;
     private ValueEventListener mListener;
     PieChart pieChart;
@@ -54,16 +65,22 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
     FirebaseUser user;
+    int mDisplayWidth;
+    int mDisplayHeight;
 
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.progress_fragment, container, false);
-
+        mView = inflater.inflate(R.layout.progress_fragment, container, false);
         mAuth = FirebaseAuth.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        user = mAuth.getCurrentUser();
+        mMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
+        test = (ConstraintLayout) mView.findViewById(R.id.test);
+        mDisplayHeight = (int) (mMetrics.heightPixels * .8);
+        mDisplayWidth = (int) (mMetrics.widthPixels * .8);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -78,17 +95,17 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
 
 
 
-        FloatingActionButton addQuibitActionButton = (FloatingActionButton) view.findViewById(R.id.addQuibitfloatingActionButton);
+        FloatingActionButton addQuibitActionButton = (FloatingActionButton) mView.findViewById(R.id.addQuibitfloatingActionButton);
         addQuibitActionButton.setOnClickListener(this);
 
-        FloatingActionButton setGoalActionButton = (FloatingActionButton) view.findViewById(R.id.setGoalfloatingActionButton);
+        FloatingActionButton setGoalActionButton = (FloatingActionButton) mView.findViewById(R.id.setGoalfloatingActionButton);
         setGoalActionButton.setOnClickListener(this);
 
         setGoalValue();
 
         getQuibitInfo();
 
-        return view;
+        return mView;
     }
 
     @Override
@@ -99,8 +116,14 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.addQuibitfloatingActionButton:
-                Intent intent1 = new Intent(getActivity(), CreateQuibitActivity.class);
-                startActivity(intent1);
+                layoutInflater = (LayoutInflater) mView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.activity_about, null);
+                popupWindow = new PopupWindow(container, mDisplayWidth, mDisplayHeight, true);
+
+                popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, 200, 800);
+
+//                Intent intent1 = new Intent(getActivity(), CreateQuibitActivity.class);
+//                startActivity(intent1);
                 break;
         }
     }
@@ -109,7 +132,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         Double percentage;
         if (goalValue == 0){
             savedAmount = 0;
-        } else if(goalValue < savedAmount) {
+        } else if(goalValue <= savedAmount) {
             savedAmount = goalValue;
         }
 

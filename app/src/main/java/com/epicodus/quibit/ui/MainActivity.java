@@ -2,15 +2,20 @@ package com.epicodus.quibit.ui;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +26,16 @@ import com.google.firebase.auth.FirebaseUser;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private PopupWindow popupWindow;
+    private LayoutInflater layoutInflater;
+    private ConstraintLayout test;
     @Bind(R.id.getStartedFloatingActionButton) FloatingActionButton mGetStartedFloatingActionButton;
     @Bind(R.id.getStartedText) TextView mGetStartedText;
     @Bind(R.id.goalSearch) EditText mGoalSearch;
     @Bind(R.id.about) FloatingActionButton mAbout;
     @Bind(R.id.logout)
+
     Button mLogout;
     boolean goalSet = false;
     FirebaseAuth mAuth;
@@ -38,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -53,8 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         };
-
-
+        test = (ConstraintLayout) findViewById(R.id.test);
         Typeface pacifico = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         mGetStartedText.setTypeface(pacifico);
 
@@ -98,8 +107,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.about:
-                Intent intentAbout = new Intent(MainActivity.this, AboutActivity.class);
-                startActivity(intentAbout);
+                layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.activity_about, null);
+                popupWindow = new PopupWindow(container, 400, 400, true);
+                popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, 500, 500);
+
                 break;
 
             case R.id.logout:
@@ -131,7 +143,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-
 
 }
 

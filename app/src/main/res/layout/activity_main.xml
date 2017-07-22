@@ -7,7 +7,8 @@
     tools:context="com.epicodus.quibit.ui.MainActivity"
     android:background="@drawable/gradient"
     tools:layout_editor_absoluteY="25dp"
-    tools:layout_editor_absoluteX="0dp">
+    tools:layout_editor_absoluteX="0dp"
+    >
 
 
     <EditText
