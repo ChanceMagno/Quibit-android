@@ -81,7 +81,6 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
         test = (ConstraintLayout) mView.findViewById(R.id.test);
         mTrueDisplayWidth = (int) mMetrics.widthPixels;
-
         mDisplayHeight = (int) (mMetrics.heightPixels * .8);
         mDisplayWidth = (int) (mMetrics.widthPixels * .8);
 
@@ -119,14 +118,8 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.addQuibitfloatingActionButton:
-                layoutInflater = (LayoutInflater) mView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.activity_about, null);
-                popupWindow = new PopupWindow(container, mDisplayWidth, mDisplayHeight, true);
-
-                popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, (mTrueDisplayWidth-mDisplayWidth)/2, 500);
-
-//                Intent intent1 = new Intent(getActivity(), CreateQuibitActivity.class);
-//                startActivity(intent1);
+                Intent intent1 = new Intent(getActivity(), CreateQuibitActivity.class);
+                startActivity(intent1);
                 break;
         }
     }
@@ -136,6 +129,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         if (goalValue == 0){
             savedAmount = 0;
         } else if(goalValue <= savedAmount) {
+            generateGoalCompletionPopup();
             savedAmount = goalValue;
         }
 
@@ -209,6 +203,13 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+    }
+
+    public void generateGoalCompletionPopup(){
+        layoutInflater = (LayoutInflater) mView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.activity_about, null);
+        popupWindow = new PopupWindow(container, mDisplayWidth, mDisplayHeight, true);
+        popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, (mTrueDisplayWidth-mDisplayWidth)/2, 500);
     }
 
     public void setGoalValue(){
