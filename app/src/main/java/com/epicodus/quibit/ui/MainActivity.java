@@ -27,9 +27,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private PopupWindow popupWindow;
-    private LayoutInflater layoutInflater;
-    private ConstraintLayout test;
     @Bind(R.id.getStartedFloatingActionButton) FloatingActionButton mGetStartedFloatingActionButton;
     @Bind(R.id.getStartedText) TextView mGetStartedText;
     @Bind(R.id.goalSearch) EditText mGoalSearch;
@@ -37,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.logout)
 
     Button mLogout;
-    boolean goalSet = false;
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -45,9 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ButterKnife.bind(this);
-
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -63,26 +57,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         };
-        test = (ConstraintLayout) findViewById(R.id.test);
         Typeface pacifico = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         mGetStartedText.setTypeface(pacifico);
 
-        mAbout.setOnClickListener(this);
-        Intent intent = getIntent();
-         boolean goalStatus = Boolean.parseBoolean(intent.getStringExtra("goalSet"));
-        String item = intent.getStringExtra("item");
-        String itemCost = intent.getStringExtra("itemCost");
-        String itemMonthly = intent.getStringExtra("itemMonthly");
-
-        if(goalStatus){
-            goalSet = goalStatus;
-            mGetStartedFloatingActionButton.setVisibility(View.GONE);
-            mGetStartedFloatingActionButton.setVisibility(View.GONE);
-            mGoalSearch.setVisibility(View.GONE);
-
-        } else {
-            mGetStartedFloatingActionButton.setOnClickListener(this);
-        }
+        mGetStartedFloatingActionButton.setOnClickListener(this);
 
         mLogout.setOnClickListener(this);
     }
@@ -105,15 +83,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                 }
                 break;
-
-            case R.id.about:
-                layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.activity_about, null);
-                popupWindow = new PopupWindow(container, 400, 400, true);
-                popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, 500, 500);
-
-                break;
-
             case R.id.logout:
                 logout();
                 Intent intentNav = new Intent(MainActivity.this, HomeActivity.class);
