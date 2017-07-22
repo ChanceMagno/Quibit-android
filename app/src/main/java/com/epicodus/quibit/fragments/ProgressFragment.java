@@ -2,19 +2,15 @@ package com.epicodus.quibit.fragments;
 
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -208,11 +204,17 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     }
 
     public void generateGoalCompletionPopup(){
+        playMusic();
         layoutInflater = (LayoutInflater) mView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.goal_reached_fragment, null);
         popupWindow = new PopupWindow(container, mDisplayWidth, mDisplayHeight, true);
         popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, (mTrueDisplayWidth-mDisplayWidth)/2, (getmTrueDisplayHeight - mDisplayHeight)/2);
+
     }
+
+    public void playMusic(){
+        MediaPlayer mediaPlayer = MediaPlayer.create(mView.getContext(), R.raw.goal_completion);
+        mediaPlayer.start();    }
 
     public void setGoalValue(){
         DatabaseReference goalRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_QUERY_USERS).child(user.getUid()).child(Constants.FIREABASE_QUERY_GOAL).child(Constants.FIREABASE_QUERY_SALE_PRICE);
