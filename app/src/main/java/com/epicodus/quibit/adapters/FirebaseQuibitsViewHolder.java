@@ -1,6 +1,7 @@
 package com.epicodus.quibit.adapters;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
@@ -87,7 +88,12 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
 
     }
 
+    public void playMusic(){
+        MediaPlayer mediaPlayer = MediaPlayer.create(mView.getContext(), R.raw.save_money);
+        mediaPlayer.start();    }
+
    public void updateQuibit(ArrayList<Quibit> quibits , ArrayList<String> quibitsKey , Integer itemPosition){
+        playMusic();
         mAuth = FirebaseAuth.getInstance();
         amount = parseFloat(quibits.get(itemPosition).getExchangeCost());
         int totalAmount = quibits.get(itemPosition).getTotalQuibits();
