@@ -81,6 +81,9 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         mView = inflater.inflate(R.layout.progress_fragment, container, false);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+        TextView mHeaderTextView = (TextView) mView.findViewById(R.id.headerTextView);
+        Typeface pacifico = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Pacifico.ttf");
+        mHeaderTextView.setTypeface(pacifico);
         mMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
         test = (ConstraintLayout) mView.findViewById(R.id.test);
