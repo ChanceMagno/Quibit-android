@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.epicodus.quibit.R;
+import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.models.Quibit;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,7 +20,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class CreateQuibitActivity extends AppCompatActivity implements View.OnClickListener {
-
     @Bind(R.id.setGoalActionButton) FloatingActionButton mNextGoalButton;
     @Bind(R.id.editTextItem) EditText mEditTextItem;
     @Bind(R.id.editTextItemCost) EditText mEditTextItemCost;
@@ -48,14 +48,13 @@ public class CreateQuibitActivity extends AppCompatActivity implements View.OnCl
         isValidItemCost(itemCost);
         isValidItemRate(itemRate);
 
-
         clearTextFields();
+
         Quibit newGoal = new Quibit(item, itemCost, itemRate);
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
-        userRef.child("exchanges").push().setValue(newGoal);
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_QUERY_USERS).child(user.getUid()).child(Constants.FIREBASE_QUERY_QUIBITS);
+        userRef.push().setValue(newGoal);
         Intent intent = new Intent(CreateQuibitActivity.this, HomeActivity.class);
         startActivity(intent);
-
     }
 
     private boolean isValidItem(String item) {

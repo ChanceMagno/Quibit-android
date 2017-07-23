@@ -10,11 +10,14 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SlidingPaneLayout;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +28,7 @@ import com.epicodus.quibit.services.PopulatePopUp;
 import com.epicodus.quibit.ui.CreateQuibitActivity;
 import com.epicodus.quibit.ui.LoginActivity;
 import com.epicodus.quibit.ui.MainActivity;
+import com.epicodus.quibit.ui.SearchGoalsActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
@@ -40,6 +44,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
+import static android.R.style.Animation_Dialog;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static java.lang.Float.parseFloat;
 
@@ -210,9 +215,9 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         layoutInflater = (LayoutInflater) mView.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.goal_reached_fragment, null);
         popupWindow = new PopupWindow(container, mDisplayWidth, mDisplayHeight, true);
+        popupWindow.setAnimationStyle(Animation_Dialog);
         popupWindow.showAtLocation(test, Gravity.NO_GRAVITY, (mTrueDisplayWidth-mDisplayWidth)/2, (mTrueDisplayHeight - mDisplayHeight)/2);
         PopulatePopUp.setGoalCompletionPopUp(popupWindow);
-
     }
 
     public void playMusic(){
