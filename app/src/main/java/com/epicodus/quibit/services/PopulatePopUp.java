@@ -37,6 +37,7 @@ public class PopulatePopUp {
                             Item goal = dataSnapshot.getValue(Item.class);
                             completeGoalRef.push().setValue(goal);
                             goalItemRef.removeValue();
+                            popupWindow.dismiss();
                         }
 
                         @Override
