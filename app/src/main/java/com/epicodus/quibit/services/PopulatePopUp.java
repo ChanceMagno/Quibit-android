@@ -28,6 +28,7 @@ public class PopulatePopUp {
             public void onDataChange(DataSnapshot dataSnapshot) {
                  goalItem = dataSnapshot.getValue(Item.class);
                 mTextView.setText(goalItem.getName());
+
             }
 
             @Override
