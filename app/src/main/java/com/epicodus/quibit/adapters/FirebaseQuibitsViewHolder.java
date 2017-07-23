@@ -28,6 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static java.lang.Float.parseFloat;
 import static java.lang.Float.valueOf;
@@ -40,14 +42,16 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseAuth mAuth;
     public CardView mCardView;
+    FloatingActionButton mSaveMoneyQuibitButton;
     Float totalDatabaseAmount;
     Float amount;
+
 
     public FirebaseQuibitsViewHolder(View itemView){
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        FloatingActionButton mSaveMoneyQuibitButton = (FloatingActionButton) itemView.findViewById(R.id.saveMoneyQuibitButton);
+        mSaveMoneyQuibitButton = (FloatingActionButton) itemView.findViewById(R.id.saveMoneyQuibitButton);
         mSaveMoneyQuibitButton.setOnClickListener(this);
         CardView mCardView = (CardView) mView.findViewById(R.id.cardView);
     }
@@ -108,7 +112,7 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
         updateTotalRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getValue() != null){
+                if(dataSnapshot.exists()){
                     totalDatabaseAmount = parseFloat(String.valueOf(dataSnapshot.getValue()));
                     updateTotalRef.setValue(totalDatabaseAmount + amount);
                 } else {updateTotalRef.setValue(amount);}

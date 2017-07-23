@@ -81,7 +81,7 @@ public class QuibitsFragment extends Fragment implements OnStartDragListener {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         Query query = FirebaseDatabase.getInstance()
-                .getReference("users").child(user.getUid()).child("exchanges")
+                .getReference(Constants.FIREBASE_QUERY_USERS).child(user.getUid()).child(Constants.FIREBASE_QUERY_QUIBITS)
                 .orderByChild(Constants.FIREBASE_QUERY_INDEX);
 
         mFirebaseAdapter = new FirebaseQuibitsListAdapter(Quibit.class,
