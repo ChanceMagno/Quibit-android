@@ -219,7 +219,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
                     goalValue = Math.round(parseFloat(dataSnapshot.getValue(String.class)));
                 } else{
                     goalValue = 0;
-                    Toast.makeText(getActivity(), "No Goal has been set", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Set a Goal to begin", Toast.LENGTH_LONG).show();
                 }
             }
 

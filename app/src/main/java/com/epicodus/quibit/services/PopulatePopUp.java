@@ -4,9 +4,6 @@ package com.epicodus.quibit.services;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.models.Item;
@@ -42,7 +39,6 @@ public class PopulatePopUp {
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-
                         }
                     });
 
