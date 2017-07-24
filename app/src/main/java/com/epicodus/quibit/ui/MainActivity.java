@@ -2,15 +2,15 @@ package com.epicodus.quibit.ui;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,14 +21,14 @@ import com.google.firebase.auth.FirebaseUser;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.getStartedFloatingActionButton) FloatingActionButton mGetStartedFloatingActionButton;
     @Bind(R.id.getStartedText) TextView mGetStartedText;
     @Bind(R.id.goalSearch) EditText mGoalSearch;
     @Bind(R.id.about) FloatingActionButton mAbout;
     @Bind(R.id.logout)
+
     Button mLogout;
-    boolean goalSet = false;
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ButterKnife.bind(this);
 
         mAuth = FirebaseAuth.getInstance();
@@ -53,27 +52,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         };
-
-
         Typeface pacifico = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         mGetStartedText.setTypeface(pacifico);
 
-        mAbout.setOnClickListener(this);
-        Intent intent = getIntent();
-         boolean goalStatus = Boolean.parseBoolean(intent.getStringExtra("goalSet"));
-        String item = intent.getStringExtra("item");
-        String itemCost = intent.getStringExtra("itemCost");
-        String itemMonthly = intent.getStringExtra("itemMonthly");
-
-        if(goalStatus){
-            goalSet = goalStatus;
-            mGetStartedFloatingActionButton.setVisibility(View.GONE);
-            mGetStartedFloatingActionButton.setVisibility(View.GONE);
-            mGoalSearch.setVisibility(View.GONE);
-
-        } else {
-            mGetStartedFloatingActionButton.setOnClickListener(this);
-        }
+        mGetStartedFloatingActionButton.setOnClickListener(this);
 
         mLogout.setOnClickListener(this);
     }
@@ -96,12 +78,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                 }
                 break;
-
-            case R.id.about:
-                Intent intentAbout = new Intent(MainActivity.this, AboutActivity.class);
-                startActivity(intentAbout);
-                break;
-
             case R.id.logout:
                 logout();
                 Intent intentNav = new Intent(MainActivity.this, HomeActivity.class);
@@ -131,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-
 
 }
 
