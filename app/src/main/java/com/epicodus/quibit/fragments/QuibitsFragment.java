@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -14,12 +16,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.adapters.FirebaseQuibitsListAdapter;
 import com.epicodus.quibit.adapters.FirebaseQuibitsViewHolder;
 import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.models.Quibit;
+import com.epicodus.quibit.ui.CreateQuibitActivity;
+import com.epicodus.quibit.ui.HomeActivity;
 import com.epicodus.quibit.ui.LoginActivity;
 import com.epicodus.quibit.util.ItemTouchHelperAdapter;
 import com.epicodus.quibit.util.OnStartDragListener;
@@ -30,10 +35,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.util.zip.Inflater;
+
+import static com.epicodus.quibit.R.id.addQuibit;
+import static com.epicodus.quibit.R.id.container;
 import static com.epicodus.quibit.R.id.quibitsRecyclerView;
 
 
-public class QuibitsFragment extends Fragment implements OnStartDragListener {
+public class QuibitsFragment extends Fragment implements OnStartDragListener, View.OnClickListener {
     private FirebaseRecyclerAdapter mFirebaseAdapter;
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -61,6 +70,9 @@ public class QuibitsFragment extends Fragment implements OnStartDragListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_quibits_recyclerview, container, false);
         setUpFireBaseAdapter(view);
+        mTestButton = (Button) view.findViewById(addQuibit);
+        mTestButton.setOnClickListener(this);
+
 
         return view;
     }
@@ -85,6 +97,16 @@ public class QuibitsFragment extends Fragment implements OnStartDragListener {
 
     }
 
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.quibitsFragmentXML, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+
+
+
     @Override
     public void onDestroy(){
         super.onDestroy();
@@ -94,5 +116,14 @@ public class QuibitsFragment extends Fragment implements OnStartDragListener {
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
         mItemTouchHelper.startDrag(viewHolder);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if (v == mTestButton){
+           Fragment fragment = new AboutFragment();
+            replaceFragment(fragment);
+        }
     }
 }
