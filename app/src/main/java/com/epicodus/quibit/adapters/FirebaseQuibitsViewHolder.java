@@ -54,7 +54,7 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
         quibitItemTextView.setText(String.format("Skip %s Today!", quibit.getExchangeItem()));
         CardView mCardView = (CardView) mView.findViewById(R.id.cardView);
         TextView totalSavedTextView = (TextView) mView.findViewById(R.id.savedAmountTextView);
-        totalSavedTextView.setText(String.valueOf(quibit.getTotalQuibits()));
+        totalSavedTextView.setText(String.valueOf("$" + quibit.getTotalQuibits()));
     }
 
     @Override

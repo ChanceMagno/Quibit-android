@@ -29,7 +29,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.quibit.ui.ItemDetailActivity" />
         </activity>
-        <activity android:name=".ui.ItemDetailActivity">
+        <activity android:name=".ui.ItemDetailActivity"
+            android:theme="@style/NoActionBarTheme">
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.quibit.ui.SearchGoalsActivity" />

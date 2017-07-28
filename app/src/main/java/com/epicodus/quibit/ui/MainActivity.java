@@ -25,10 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.getStartedFloatingActionButton) FloatingActionButton mGetStartedFloatingActionButton;
     @Bind(R.id.getStartedText) TextView mGetStartedText;
     @Bind(R.id.goalSearch) EditText mGoalSearch;
-    @Bind(R.id.about) FloatingActionButton mAbout;
-    @Bind(R.id.logout)
 
-    Button mLogout;
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -57,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mGetStartedFloatingActionButton.setOnClickListener(this);
 
-        mLogout.setOnClickListener(this);
     }
 
 
@@ -78,11 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                 }
                 break;
-            case R.id.logout:
-                logout();
-                Intent intentNav = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(intentNav);
-                break;
+
         }
     }
 

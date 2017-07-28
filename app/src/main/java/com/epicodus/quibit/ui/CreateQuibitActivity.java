@@ -48,7 +48,7 @@ public class CreateQuibitActivity extends AppCompatActivity implements View.OnCl
         boolean validEmail = isValidItemCost(itemCost);
         boolean validPassword = isValidItemRate(itemRate);
 
-        if(validName || validEmail || validPassword) return;
+        if(!validName || !validEmail || !validPassword) return;
 
 
         clearTextFields();
@@ -61,25 +61,28 @@ public class CreateQuibitActivity extends AppCompatActivity implements View.OnCl
     }
 
     private boolean isValidItem(String item) {
-        boolean isGoodName = (item != null);
-        if (isGoodName) {
+        boolean isGoodName = (!item.equals(""));
+        if (!isGoodName) {
             mEditTextItem.setError("Please input an item");
+            return false;
         }
         return isGoodName;
     }
 
     private boolean isValidItemCost(String itemCost){
-        boolean isGoodItemCost = (itemCost != null);
-        if(isGoodItemCost){
+        boolean isGoodItemCost = (!itemCost.equals(""));
+        if(!isGoodItemCost){
             mEditTextItemCost.setError("Please input an average cost");
+            return false;
         }
         return true;
     }
 
     private boolean isValidItemRate(String itemRate){
-        boolean isGoodItemRate = (itemRate != null);
-        if(isGoodItemRate){
+        boolean isGoodItemRate = (!itemRate.equals(""));
+        if(!isGoodItemRate){
             mEditTextItemCost.setError("Please input an average cost");
+            return false;
         }
         return true;
     }
