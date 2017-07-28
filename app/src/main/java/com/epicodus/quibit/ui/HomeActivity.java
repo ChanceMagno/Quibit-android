@@ -1,12 +1,11 @@
 package com.epicodus.quibit.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.adapters.SectionsPageAdapter;
