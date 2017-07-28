@@ -1,6 +1,7 @@
 package com.epicodus.quibit.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.models.Quibit;
+import com.epicodus.quibit.ui.CreateQuibitActivity;
 import com.epicodus.quibit.util.ItemTouchHelperViewHolder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,6 +39,7 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
     Float amount;
 
 
+
     public FirebaseQuibitsViewHolder(View itemView){
         super(itemView);
         mView = itemView;
@@ -44,8 +47,6 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
         mSaveMoneyQuibitButton = (FloatingActionButton) itemView.findViewById(R.id.saveMoneyQuibitButton);
         mSaveMoneyQuibitButton.setOnClickListener(this);
         CardView mCardView = (CardView) mView.findViewById(R.id.cardView);
-
-
     }
 
     public void bindQuibit(Quibit quibit){
@@ -84,7 +85,8 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
             }
         });
 
-    }
+     }
+
 
 
 

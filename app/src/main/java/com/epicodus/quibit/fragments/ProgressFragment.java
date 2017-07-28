@@ -102,9 +102,6 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
 
 
 
-        FloatingActionButton addQuibitActionButton = (FloatingActionButton) mView.findViewById(R.id.addQuibitfloatingActionButton);
-        addQuibitActionButton.setOnClickListener(this);
-
         FloatingActionButton setGoalActionButton = (FloatingActionButton) mView.findViewById(R.id.setGoalfloatingActionButton);
         setGoalActionButton.setOnClickListener(this);
 
@@ -121,10 +118,6 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
             case R.id.setGoalfloatingActionButton:
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.addQuibitfloatingActionButton:
-                Intent intent1 = new Intent(getActivity(), CreateQuibitActivity.class);
-                startActivity(intent1);
                 break;
         }
     }
