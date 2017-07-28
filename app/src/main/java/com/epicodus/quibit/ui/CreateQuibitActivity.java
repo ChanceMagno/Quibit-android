@@ -1,9 +1,9 @@
 package com.epicodus.quibit.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -44,39 +44,45 @@ public class CreateQuibitActivity extends AppCompatActivity implements View.OnCl
         String itemCost = mEditTextItemCost.getText().toString();
         String itemRate = mEditTextItemRate.getText().toString();
 
-        isValidItem(item);
-        isValidItemCost(itemCost);
-        isValidItemRate(itemRate);
+        boolean validName = isValidItem(item);
+        boolean validEmail = isValidItemCost(itemCost);
+        boolean validPassword = isValidItemRate(itemRate);
+
+        if(!validName || !validEmail || !validPassword) return;
+
 
         clearTextFields();
 
-        Quibit newGoal = new Quibit(item, itemCost, itemRate);
+        
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_QUERY_USERS).child(user.getUid()).child(Constants.FIREBASE_QUERY_QUIBITS);
-        userRef.push().setValue(newGoal);
+        userRef.push().setValue(new Quibit(item, itemCost, itemRate));
         Intent intent = new Intent(CreateQuibitActivity.this, HomeActivity.class);
         startActivity(intent);
     }
 
     private boolean isValidItem(String item) {
-        boolean isGoodName = (item != null);
+        boolean isGoodName = (!item.equals(""));
         if (!isGoodName) {
             mEditTextItem.setError("Please input an item");
+            return false;
         }
         return isGoodName;
     }
 
     private boolean isValidItemCost(String itemCost){
-        boolean isGoodItemCost = (itemCost != null);
+        boolean isGoodItemCost = (!itemCost.equals(""));
         if(!isGoodItemCost){
             mEditTextItemCost.setError("Please input an average cost");
+            return false;
         }
         return true;
     }
 
     private boolean isValidItemRate(String itemRate){
-        boolean isGoodItemRate = (itemRate != null);
+        boolean isGoodItemRate = (!itemRate.equals(""));
         if(!isGoodItemRate){
             mEditTextItemCost.setError("Please input an average cost");
+            return false;
         }
         return true;
     }

@@ -1,10 +1,6 @@
 package com.epicodus.quibit.adapters;
 
 
-
-
-
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -15,17 +11,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import com.epicodus.quibit.ui.ItemDetailActivity;
+
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.models.Item;
+import com.epicodus.quibit.ui.ItemDetailActivity;
 import com.epicodus.quibit.util.ItemTouchHelperAdapter;
 import com.squareup.picasso.Picasso;
+
 import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
 import static java.lang.Float.parseFloat;
 
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemViewHolder> implements ItemTouchHelperAdapter{

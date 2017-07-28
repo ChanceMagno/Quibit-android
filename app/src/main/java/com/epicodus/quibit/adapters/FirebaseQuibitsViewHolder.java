@@ -1,21 +1,18 @@
 package com.epicodus.quibit.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
-import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.models.Quibit;
+import com.epicodus.quibit.ui.CreateQuibitActivity;
 import com.epicodus.quibit.util.ItemTouchHelperViewHolder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,14 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static java.lang.Float.parseFloat;
-import static java.lang.Float.valueOf;
-import static java.security.AccessController.getContext;
 
 public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ItemTouchHelperViewHolder{
 
@@ -45,6 +37,7 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
     FloatingActionButton mSaveMoneyQuibitButton;
     Float totalDatabaseAmount;
     Float amount;
+
 
 
     public FirebaseQuibitsViewHolder(View itemView){
@@ -60,11 +53,12 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
         TextView quibitItemTextView = (TextView) mView.findViewById(R.id.quibitTextView);
         quibitItemTextView.setText(String.format("Skip %s Today!", quibit.getExchangeItem()));
         CardView mCardView = (CardView) mView.findViewById(R.id.cardView);
+        TextView totalSavedTextView = (TextView) mView.findViewById(R.id.savedAmountTextView);
+        totalSavedTextView.setText(String.valueOf("$" + quibit.getTotalQuibits()));
     }
 
     @Override
     public void onClick(final View view){
-
         Query ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_QUERY_USERS).child(user.getUid()).child(Constants.FIREBASE_QUERY_QUIBITS).orderByChild(Constants.FIREBASE_QUERY_INDEX);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -84,13 +78,17 @@ public class FirebaseQuibitsViewHolder extends RecyclerView.ViewHolder implement
                         updateTotal();
                         break;
                  }
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError){
             }
         });
 
-    }
+     }
+
+
+
 
     public void playMusic(){
         MediaPlayer mediaPlayer = MediaPlayer.create(mView.getContext(), R.raw.save_money);

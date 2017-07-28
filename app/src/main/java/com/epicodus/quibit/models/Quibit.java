@@ -38,7 +38,7 @@ public class Quibit {
         return exchangeOccurenceRate;
     }
 
-    public String getGoalCreationDate() {
+    public String getQuibitCreationDate() {
         return quibitCreationDate;
     }
 
@@ -47,6 +47,7 @@ public class Quibit {
     public String getIndex(String index){
         return index;
     }
+
 
     public void setIndex(String index){
         this.index = index;

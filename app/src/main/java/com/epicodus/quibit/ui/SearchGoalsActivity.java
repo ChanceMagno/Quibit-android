@@ -1,12 +1,10 @@
 package com.epicodus.quibit.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import android.view.View;
 
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.adapters.ItemListAdapter;
@@ -30,7 +28,7 @@ public class SearchGoalsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_rewards);
+        setContentView(R.layout.activity_recycler_view);
         ButterKnife.bind(this);
         Intent intent = getIntent();
         String goalSearch = intent.getStringExtra("goalSearch");

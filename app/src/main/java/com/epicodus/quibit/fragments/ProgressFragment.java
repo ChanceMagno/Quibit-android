@@ -10,14 +10,12 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SlidingPaneLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +26,6 @@ import com.epicodus.quibit.services.PopulatePopUp;
 import com.epicodus.quibit.ui.CreateQuibitActivity;
 import com.epicodus.quibit.ui.LoginActivity;
 import com.epicodus.quibit.ui.MainActivity;
-import com.epicodus.quibit.ui.SearchGoalsActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
@@ -42,6 +39,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 import static android.R.style.Animation_Dialog;
@@ -104,9 +102,6 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
 
 
 
-        FloatingActionButton addQuibitActionButton = (FloatingActionButton) mView.findViewById(R.id.addQuibitfloatingActionButton);
-        addQuibitActionButton.setOnClickListener(this);
-
         FloatingActionButton setGoalActionButton = (FloatingActionButton) mView.findViewById(R.id.setGoalfloatingActionButton);
         setGoalActionButton.setOnClickListener(this);
 
@@ -123,10 +118,6 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
             case R.id.setGoalfloatingActionButton:
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.addQuibitfloatingActionButton:
-                Intent intent1 = new Intent(getActivity(), CreateQuibitActivity.class);
-                startActivity(intent1);
                 break;
         }
     }
@@ -166,6 +157,13 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         pieChart.setHoleColor(ColorTemplate.COLOR_SKIP);
         pieDataSet.setColors(new int[] { R.color.colorPrimary, R.color.positiveColor }, getActivity());
  }
+
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.QuibitTest, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
     public void addValuesToPIEENTRY(){
         Integer remainingNeeded = 100 - percentageRounded;
@@ -219,7 +217,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
                     goalValue = Math.round(parseFloat(dataSnapshot.getValue(String.class)));
                 } else{
                     goalValue = 0;
-                    Toast.makeText(getActivity(), "No Goal has been set", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Set a Goal to begin", Toast.LENGTH_LONG).show();
                 }
             }
 
