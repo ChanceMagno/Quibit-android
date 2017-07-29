@@ -3,8 +3,6 @@
     package="com.epicodus.quibit">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -18,29 +16,33 @@
         <activity
             android:name=".ui.MainActivity"
             android:theme="@style/NoActionBarTheme" />
+
         <activity android:name=".ui.SearchGoalsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.quibit.ui.MainActivity" />
         </activity>
+
         <activity android:name=".ui.CreateQuibitActivity"
             android:theme="@style/NoActionBarTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.quibit.ui.ItemDetailActivity" />
         </activity>
+
         <activity android:name=".ui.ItemDetailActivity"
             android:theme="@style/NoActionBarTheme">
-            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.quibit.ui.SearchGoalsActivity" />
         </activity>
+
         <activity android:name=".ui.AboutActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.epicodus.quibit.ui.MainActivity" />
         </activity>
+
         <activity
             android:name=".ui.LoginActivity"
             android:theme="@style/NoActionBarTheme">
@@ -50,6 +52,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.CreateAccountActivity"
             android:label="Create Account" />
@@ -57,8 +60,8 @@
             android:name=".ui.HomeActivity"
             android:label="@string/title_activity_test"
             android:theme="@style/NoActionBarTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-
+            android:configChanges="keyboard|locale|fontScale|screenLayout|screenSize|uiMode|navigation|touchscreen|keyboardHidden|layoutDirection|smallestScreenSize"
+            />
     </application>
 
 </manifest>
