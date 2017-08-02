@@ -2,7 +2,9 @@ package com.epicodus.quibit.fragments;
 
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -69,6 +71,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
     private int mDisplayHeight;
     private int mTrueDisplayWidth;
     private int mTrueDisplayHeight;
+    private TextView mHeaderTextView;
 
 
 
@@ -78,10 +81,8 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         mView = inflater.inflate(R.layout.progress_fragment, container, false);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        TextView mHeaderTextView = (TextView) mView.findViewById(R.id.headerTextView);
-        Typeface pacifico = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Pacifico.ttf");
-        mHeaderTextView.setTypeface(pacifico);
         mMetrics = new DisplayMetrics();
+
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
         test = (ConstraintLayout) mView.findViewById(R.id.test);
         mTrueDisplayWidth = (int) mMetrics.widthPixels;
@@ -99,7 +100,6 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
                 }
             }
         };
-
 
 
         FloatingActionButton setGoalActionButton = (FloatingActionButton) mView.findViewById(R.id.setGoalfloatingActionButton);
@@ -226,6 +226,19 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
 
             }
         });
+    }
+
+    public void onConfigurationChanged(Configuration _newConfig) {
+
+        if (_newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            mHeaderTextView.setVisibility(View.INVISIBLE);
+        }
+
+        if (_newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+           mHeaderTextView.setVisibility(View.VISIBLE);
+        }
+
+        super.onConfigurationChanged(_newConfig);
     }
 
     @Override
