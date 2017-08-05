@@ -158,12 +158,12 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         pieDataSet.setColors(new int[] { R.color.colorPrimary, R.color.positiveColor }, getActivity());
  }
 
-    public void replaceFragment(Fragment someFragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.QuibitTest, someFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
+//    public void replaceFragment(Fragment someFragment) {
+//        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//        transaction.replace(R.id.QuibitTest, someFragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
+//    }
 
     public void addValuesToPIEENTRY(){
         Integer remainingNeeded = 100 - percentageRounded;

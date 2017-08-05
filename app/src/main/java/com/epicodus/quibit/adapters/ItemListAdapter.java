@@ -84,8 +84,8 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @Bind(R.id.itemNameTextView) TextView mItemNameTextView;
         @Bind(R.id.itemImageView) ImageView mImageView;
-        @Bind(R.id.itemDescriptionTextView) TextView mDescriptionTextView;
-        @Bind(R.id.ratingBar) RatingBar mRatingBar;
+//        @Bind(R.id.itemDescriptionTextView) TextView mDescriptionTextView;
+//        @Bind(R.id.ratingBar) RatingBar mRatingBar;
         @Bind(R.id.msrpPriceTextView) TextView mMSRP;
         @Bind(R.id.salePriceTextView) TextView mPrice;
         @Bind(R.id.ViewItemButton) FloatingActionButton mActionButton;
@@ -103,18 +103,18 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
 
         public void bindItem(Item item) {
             mItemNameTextView.setText(item.getName());
-            if (item.getDescription().equals("")){
-                mDescriptionTextView.setText("No Description Available");
-            } else {
-                mDescriptionTextView.setText(item.getDescription());
-            }
+//            if (item.getDescription().equals("")){
+//                mDescriptionTextView.setText("No Description Available");
+//            } else {
+//                mDescriptionTextView.setText(item.getDescription());
+//            }
             if (item.getMsrp().equals("")){
                 mMSRP.setText("not available");
             } else {
                 mMSRP.setText(String.format("$%s", item.getMsrp()));
             }
             mPrice.setText(String.format("$%s", item.getSalePrice()));
-            mRatingBar.setRating(parseFloat(item.getRating()) / 2);
+//            mRatingBar.setRating(parseFloat(item.getRating()) / 2);
             Picasso.with(itemView.getContext()).load(item.getLargeImage()).resize(MAX_WIDTH, MAX_HEIGHT).centerCrop().into(mImageView);
         }
 

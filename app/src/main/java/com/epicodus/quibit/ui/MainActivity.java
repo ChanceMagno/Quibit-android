@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -22,9 +21,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    @Bind(R.id.getStartedFloatingActionButton) FloatingActionButton mGetStartedFloatingActionButton;
+    @Bind(R.id.searchButton) Button mSearchButton;
     @Bind(R.id.getStartedText) TextView mGetStartedText;
     @Bind(R.id.goalSearch) EditText mGoalSearch;
+    @Bind(R.id.createGoalButton) Button mCreateGoalButton;
+    @Bind(R.id.orTextview) TextView mOrTextView;
 
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -51,8 +52,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
         Typeface pacifico = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         mGetStartedText.setTypeface(pacifico);
+        mOrTextView.setTypeface(pacifico);
 
-        mGetStartedFloatingActionButton.setOnClickListener(this);
+        mCreateGoalButton.setVisibility(View.INVISIBLE);
+        mOrTextView.setVisibility(View.INVISIBLE);
+
+        mSearchButton.setOnClickListener(this);
+        mCreateGoalButton.setOnClickListener(this);
 
     }
 
@@ -61,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.getStartedFloatingActionButton:
+            case R.id.searchButton:
                 String goalSearch = mGoalSearch.getText().toString();
                 if (goalSearch.equals("")) {
                     Toast toast = Toast.makeText(MainActivity.this, "Please input an item to search for.", Toast.LENGTH_LONG);
@@ -74,7 +80,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                 }
                 break;
-
+            case R.id.createGoalButton:
+                Intent intent = new Intent(this, ItemDetailActivity.class);
         }
     }
 
