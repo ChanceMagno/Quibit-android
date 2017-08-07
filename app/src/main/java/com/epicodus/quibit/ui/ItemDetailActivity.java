@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,8 +35,8 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     @Bind(R.id.itemPriceTextView) TextView mItemPriceTextView;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
-    private static final int MAX_WIDTH = 375;
-    private static final int MAX_HEIGHT = 145;
+    private static final int MAX_WIDTH = 300;
+    private static final int MAX_HEIGHT = 300;
     Item selectedItem;
     FirebaseAuth mAuth;
     String goalValue;
@@ -84,6 +85,7 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
 
     public void setContent(Item selectedItem){
         mItemNameTextView.setText(selectedItem.getName());
+        mItemDescriptionTextView.setMovementMethod(new ScrollingMovementMethod());
         mItemDescriptionTextView.setText(selectedItem.getDescription());
         mItemPriceTextView.setText(selectedItem.getSalePrice());
         Picasso.with(ItemDetailActivity.this).load(selectedItem.getLargeImage()).resize(MAX_WIDTH, MAX_HEIGHT).centerCrop().into(mItemImageView);

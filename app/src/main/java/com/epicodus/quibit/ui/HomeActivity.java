@@ -60,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new ProgressFragment(), "Progress");
         adapter.addFragment(new QuibitsFragment(), "Quibits");
-        adapter.addFragment(new AboutFragment(), "About Us");
+//        adapter.addFragment(new AboutFragment(), "About Us");
         viewPager.setAdapter(adapter);
     }
 
