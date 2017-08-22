@@ -4,7 +4,6 @@ package com.epicodus.quibit.fragments;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +11,6 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,7 +23,6 @@ import android.widget.Toast;
 import com.epicodus.quibit.R;
 import com.epicodus.quibit.constants.Constants;
 import com.epicodus.quibit.services.PopulatePopUp;
-import com.epicodus.quibit.ui.CreateQuibitActivity;
 import com.epicodus.quibit.ui.LoginActivity;
 import com.epicodus.quibit.ui.MainActivity;
 import com.github.mikephil.charting.charts.PieChart;
@@ -94,7 +91,7 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
                 if(user == null){
-                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
@@ -112,11 +109,13 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         return mView;
     }
 
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.setGoalfloatingActionButton:
-                Intent intent = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getContext(), MainActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -127,8 +126,10 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         if (goalValue == 0){
             savedAmount = 0;
         } else if(goalValue <= savedAmount) {
-            generateGoalCompletionPopup();
             savedAmount = goalValue;
+            if(goalValue != 0 || savedAmount != 0){
+                generateGoalCompletionPopup();
+            }
         }
 
         percentage = (double) savedAmount / goalValue * 100;
@@ -150,12 +151,12 @@ public class ProgressFragment extends Fragment implements View.OnClickListener {
         pieChart.setData(pieData);
         pieChart.animateY(5000);
         pieData.setValueTextSize(14);
-        Typeface pacifico = Typeface.createFromAsset(getActivity().getAssets(), "fonts/peralta.ttf");
+        Typeface pacifico = Typeface.createFromAsset(getContext().getAssets(), "fonts/peralta.ttf");
         pieDataSet.setValueTypeface(pacifico);
         pieChart.setUsePercentValues(true);
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleColor(ColorTemplate.COLOR_SKIP);
-        pieDataSet.setColors(new int[] { R.color.colorPrimary, R.color.positiveColor }, getActivity());
+        pieDataSet.setColors(new int[] { R.color.colorPrimary, R.color.positiveColor }, getContext());
  }
 
 //    public void replaceFragment(Fragment someFragment) {
