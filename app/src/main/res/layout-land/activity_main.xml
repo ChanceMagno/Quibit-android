@@ -27,7 +27,7 @@
         android:id="@+id/getStartedText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Set a Goal"
+        android:text="Quibit"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintHorizontal_bias="0.0"

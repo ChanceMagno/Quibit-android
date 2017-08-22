@@ -42,22 +42,6 @@ public class QuibitsFragment extends Fragment implements OnStartDragListener, Vi
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mAuth = FirebaseAuth.getInstance();
-
-
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user == null){
-                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                }
-            }
-        };
-
 
     }
 
@@ -90,14 +74,7 @@ public class QuibitsFragment extends Fragment implements OnStartDragListener, Vi
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
 
     }
-//
-//    public void replaceFragment(Fragment someFragment) {
-//        getActivity().findViewById(R.id.quibitsRecyclerView).setActivated(false);
-//        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//        transaction.replace(mView.getId(), someFragment);
-//        transaction.addToBackStack(null);
-//        transaction.commit();
-//    }
+
 
 
 
